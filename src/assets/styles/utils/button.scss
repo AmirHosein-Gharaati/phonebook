@@ -4,6 +4,8 @@
   border-radius: $border-default;
   margin: $margin-small;
   cursor: pointer;
+  text-decoration: none;
+  color: black;
 
   &-edit {
     background-color: $color-warning;
@@ -13,5 +15,13 @@
   &-delete {
     background-color: $color-danger;
     color: white;
+  }
+
+  &-active {
+    background-color: $color-primary;
+    color: white;
+    > a {
+      color: white;
+    }
   }
 }
