@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&display=swap");
+
 @import "./variable.scss";
 
 // mixins
@@ -27,6 +29,7 @@
 body {
   width: 100vw;
   height: 100vh;
+  font-family: "Oxygen", sans-serif;
 }
 
 .app-wrapper {
