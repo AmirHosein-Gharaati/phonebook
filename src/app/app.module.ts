@@ -10,6 +10,7 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 import { ShortenPipe } from './shared/pipes/shorten.pipe';
 import { AddComponent } from './modules/home/pages/add/add.component';
 import { ContactDetailComponent } from './modules/home/components/contact-detail/contact-detail.component';
+import { ContactItemComponent } from './modules/home/components/contact-item/contact-item.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ContactDetailComponent } from './modules/home/components/contact-detail
     LoaderComponent,
     ShortenPipe,
     AddComponent,
-    ContactDetailComponent
+    ContactDetailComponent,
+    ContactItemComponent
   ],
   imports: [
     BrowserModule,
