@@ -1,6 +1,4 @@
 .home {
+  @include main;
   background-color: red;
-  height: $height-default;
-
-  width: 100%;
 }
