@@ -4,6 +4,6 @@
   background-color: yellow;
   height: $height-small;
 
-  width: $max-app-width;
-  max-width: $max-app-width;
+  width: 100%;
+  border-radius: $border-default $border-default 0 0;
 }
