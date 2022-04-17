@@ -3,5 +3,7 @@
   align-items: center;
   background-color: pink;
   height: $height-small;
+
   width: 100%;
+  border-radius: 0 0 $border-default $border-default;
 }
