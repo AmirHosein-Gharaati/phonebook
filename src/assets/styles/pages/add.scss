@@ -1,6 +1,7 @@
 .add {
   @include main;
   @include component-padding;
+  position: relative;
 
   input {
     width: 100%;
@@ -75,5 +76,13 @@
         width: 100%;
       }
     }
+  }
+
+  &__save-btn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: $font-200;
   }
 }
