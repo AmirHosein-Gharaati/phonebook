@@ -47,6 +47,13 @@
     margin-right: $margin-default;
   }
 
+  &__form-controls {
+    &__top {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
   &__form-item {
     width: 100%;
     display: flex;

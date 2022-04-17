@@ -18,6 +18,11 @@
     color: white;
   }
 
+  &-success {
+    background-color: $color-success;
+    color: white;
+  }
+
   &-active {
     background-color: $color-primary;
     color: white;
