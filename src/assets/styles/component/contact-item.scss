@@ -1,0 +1,16 @@
+.contact-item {
+  background-color: rgba(227, 227, 227, 0.8);
+  display: flex;
+  align-items: center;
+  height: 50px;
+  margin-bottom: $margin-large;
+  padding: 0 $padding-small;
+  border-radius: $border-large;
+
+  img {
+    border-radius: $border-large;
+    width: 40px;
+    height: 40px;
+    margin-right: $margin-default;
+  }
+}
