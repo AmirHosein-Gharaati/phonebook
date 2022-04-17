@@ -22,4 +22,31 @@
     justify-content: center;
     align-items: center;
   }
+
+  &__list {
+    @include component-padding;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    margin: $margin-default 0;
+
+    img {
+      width: 30px;
+      height: 30px;
+      border-radius: $border-default;
+      margin-right: $margin-large;
+    }
+
+    &__type {
+      font-size: $font-200;
+      font-weight: bold;
+      margin-right: $margin-large;
+    }
+
+    &__text {
+      font-size: $font-200;
+    }
+  }
 }
