@@ -8,6 +8,8 @@ import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { ShortenPipe } from './shared/pipes/shorten.pipe';
+import { AddComponent } from './modules/home/pages/add/add.component';
+import { ContactDetailComponent } from './modules/home/components/contact-detail/contact-detail.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { ShortenPipe } from './shared/pipes/shorten.pipe';
     HeaderComponent,
     FooterComponent,
     LoaderComponent,
-    ShortenPipe
+    ShortenPipe,
+    AddComponent,
+    ContactDetailComponent
   ],
   imports: [
     BrowserModule,
