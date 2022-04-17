@@ -55,6 +55,11 @@
       justify-content: space-between;
       margin-bottom: $margin-default;
     }
+    
+    &__list {
+      max-height: 190px;
+      overflow-y: auto;
+    }
   }
 
   &__form-item {
