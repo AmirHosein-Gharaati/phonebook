@@ -1,5 +1,30 @@
 .add {
   @include main;
   @include component-padding;
-  // background-color: blue;
+
+  label {
+    font-size: $font-200;
+    font-weight: 600;
+    margin-bottom: $margin-default;
+  }
+
+  &__image {
+    display: flex;
+    flex-direction: column;
+
+    &-wrapper {
+      display: flex;
+      align-items: center;
+      margin-bottom: $margin-large;
+    }
+
+    img {
+      margin-right: $margin-default;
+      width: 40px;
+    }
+
+    input {
+      width: 50%;
+    }
+  }
 }
