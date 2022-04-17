@@ -6,5 +6,6 @@
   height: $height-small;
   width: 100%;
   border-radius: 0 0 $border-default $border-default;
+  border-top: 1px solid $color-secondary;
   color: white;
 }
