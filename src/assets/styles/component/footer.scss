@@ -1,9 +1,10 @@
 .footer {
   display: flex;
   align-items: center;
-  background-color: pink;
+  justify-content: center;
+  background-color: rgb(17, 76, 117);
   height: $height-small;
-
   width: 100%;
   border-radius: 0 0 $border-default $border-default;
+  color: white;
 }
