@@ -4,13 +4,13 @@
 
   .col-left {
     @include component-padding;
-    width: 30%;
+    width: 35%;
     border-right: 1px solid $color-secondary;
   }
 
   .col-right {
     @include component-padding;
-    width: 70%;
+    width: 65%;
     // background-color: red;
   }
 
