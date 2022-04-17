@@ -1,3 +1,6 @@
+// Util
+@import "./utils/container.scss";
+
 // pages
 @import "./pages/home.scss";
 @import "./pages/add.scss";
@@ -6,3 +9,14 @@
 @import "./component/contact-detail.scss";
 @import "./component/footer.scss";
 @import "./component/header.scss";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
