@@ -16,4 +16,10 @@
       margin-bottom: $margin-default;
     }
   }
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
