@@ -1,3 +1,7 @@
 .home {
   background-color: red;
+  height: $height-default;
+
+  width: $max-app-width;
+  max-width: $max-app-width;
 }
