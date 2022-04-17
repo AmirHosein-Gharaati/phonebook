@@ -8,6 +8,7 @@
   .col-left {
     @include component-padding;
     width: 30%;
+    border-right: 1px solid $color-secondary;
   }
 
   .col-right {
