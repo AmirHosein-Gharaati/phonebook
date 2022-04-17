@@ -17,4 +17,9 @@
       display: flex;
     }
   }
+
+  &__logo {
+    font-size: $font-300;
+    font-weight: 600;
+  }
 }
