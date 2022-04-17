@@ -1,8 +1,17 @@
 <header class="header container-h">
   <nav class="navbar">
     <ul>
-      <li class="btn btn-active"><a href="#home">Home</a></li>
-      <li class="btn"><a href="#add">Add</a></li>
+      <li
+        routerLinkActive="btn-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="btn"
+        routerLink="/"
+      >
+        <a>Home</a>
+      </li>
+      <li routerLinkActive="btn-active" class="btn" routerLink="/add">
+        <a>Add</a>
+      </li>
     </ul>
 
     <span class="header__logo">PhoneBook</span>
