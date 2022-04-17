@@ -1,4 +1,36 @@
 .home {
   @include main;
-  // background-color: red;
+
+  border-top: 1px solid $color-secondary;
+  border-bottom: 1px solid $color-secondary;
+  display: flex;
+
+  .col-left {
+    @include component-padding;
+    width: 30%;
+  }
+
+  .col-right {
+    @include component-padding;
+    width: 70%;
+    background-color: red;
+  }
+
+  &__search {
+    width: 100%;
+    height: 40px;
+    background-color: transparent;
+    margin-bottom: $margin-small;
+
+    input {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(160, 193, 255, 0.5);
+      border-radius: $border-large;
+      margin-bottom: $margin-default;
+      padding: 0 $padding-default;
+      border: none;
+      outline: none;
+    }
+  }
 }
