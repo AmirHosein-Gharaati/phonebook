@@ -1,3 +1,19 @@
 .contact-detail {
-  background-color: green;
+  &__main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__image {
+      width: 80px;
+      height: 80px;
+      margin-bottom: $margin-large;
+      border-radius: 50%;
+    }
+
+    &__name {
+      font-size: $font-300;
+      margin-bottom: $margin-default;
+    }
+  }
 }
