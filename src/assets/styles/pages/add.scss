@@ -3,6 +3,7 @@
   @include component-padding;
 
   label {
+    display: block;
     font-size: $font-200;
     font-weight: 600;
     margin-bottom: $margin-default;
@@ -11,11 +12,11 @@
   &__image {
     display: flex;
     flex-direction: column;
+    margin-bottom: $margin-huge;
 
     &-wrapper {
       display: flex;
       align-items: center;
-      margin-bottom: $margin-large;
     }
 
     img {
@@ -25,6 +26,20 @@
 
     input {
       width: 50%;
+    }
+  }
+
+  &__name {
+    display: flex;
+    margin-bottom: $margin-huge;
+  }
+
+  &__first-name,
+  &__last-name {
+    width: 50%;
+
+    input {
+      width: 90%;
     }
   }
 }
