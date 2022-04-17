@@ -6,4 +6,28 @@
 
   width: 100%;
   border-radius: $border-default $border-default 0 0;
+
+  .navbar {
+    ul {
+      list-style-type: none;
+      display: flex;
+
+      li {
+        a {
+          text-decoration: none;
+          color: $color-secondary;
+          padding: $padding-small $padding-default;
+          margin-right: $margin-small;
+        }
+
+        &.active {
+          a {
+            color: white !important;
+            background-color: $color-primary;
+            border-radius: $border-default;
+          }
+        }
+      }
+    }
+  }
 }
