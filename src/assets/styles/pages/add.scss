@@ -2,6 +2,14 @@
   @include main;
   @include component-padding;
 
+  input {
+    width: 100%;
+  }
+
+  hr {
+    margin-bottom: $margin-default;
+  }
+
   label {
     display: block;
     font-size: $font-200;
@@ -23,10 +31,6 @@
       margin-right: $margin-default;
       width: 40px;
     }
-
-    input {
-      width: 50%;
-    }
   }
 
   &__name {
@@ -37,9 +41,30 @@
   &__first-name,
   &__last-name {
     width: 50%;
+  }
+
+  &__first-name {
+    margin-right: $margin-default;
+  }
+
+  &__form-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: $margin-large 0;
+
+    img {
+      width: 30px;
+      border-radius: $border-default;
+      margin-right: $margin-default;
+    }
 
     input {
-      width: 90%;
+      margin-right: $margin-default;
+
+      &[name="text"] {
+        width: 100%;
+      }
     }
   }
 }
