@@ -28,7 +28,9 @@ export class AddComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      this.id = +params['id'];
+      this.id = +params['id']
+        ? +params['id']
+        : this.contactService.getLength() + 1;
       this.editMode = params['id'] != null;
 
       this.initForm();
@@ -42,7 +44,7 @@ export class AddComponent implements OnInit {
     let data = new FormArray([]);
 
     if (this.editMode) {
-      const contact: Contact = this.contactService.getContact(this.id);
+      const contact = this.contactService.getContact(this.id);
       if (!contact) {
         this.router.navigate(['../'], { relativeTo: this.route });
         return;
@@ -60,7 +62,7 @@ export class AddComponent implements OnInit {
     }
 
     this.contactForm = this.formBuilder.group({
-      id: this.id ? this.id : +this.contactService.getLength + 1,
+      id: this.id,
       imageURL: new FormControl(imageURL, Validators.required),
       firstName: new FormControl(firstName, Validators.required),
       lastName: new FormControl(lastName, Validators.required),
@@ -84,8 +86,6 @@ export class AddComponent implements OnInit {
   }
 
   onSumbit() {
-    console.log(this.contactForm);
-
     if (this.editMode) {
       this.contactService.updateConact(
         this.id,
