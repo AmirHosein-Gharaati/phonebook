@@ -12,6 +12,7 @@ import { ShortenPipe } from './shared/pipes/shorten.pipe';
 import { AddComponent } from './modules/home/pages/add/add.component';
 import { ContactDetailComponent } from './modules/home/components/contact-detail/contact-detail.component';
 import { ContactItemComponent } from './modules/home/components/contact-item/contact-item.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import { ContactItemComponent } from './modules/home/components/contact-item/con
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
