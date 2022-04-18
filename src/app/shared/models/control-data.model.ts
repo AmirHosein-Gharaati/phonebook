@@ -1,7 +1,7 @@
 export enum CDCategories {
-  PHONE_NUMBER = 'phone_number',
-  HOME_NUMBER = 'home_number',
-  EMAIL = 'email',
+  PHONE_NUMBER = 'Phone Number',
+  HOME_NUMBER = 'Home Number',
+  EMAIL = 'Email',
 }
 
 export class ControlData {

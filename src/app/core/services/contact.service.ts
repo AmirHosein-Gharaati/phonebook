@@ -16,7 +16,7 @@ export class ContactService {
   private contacts: Contact[] = [
     new Contact(
       1,
-      'https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png',
+      'https://raw.githubusercontent.com/AmirHosein-Gharaati/portfolio/master/src/assets/images/me.png',
       'Amirhosein',
       'Gharaati',
       [new ControlData(CDCategories.PHONE_NUMBER, '+98 936 572 31 24')]
