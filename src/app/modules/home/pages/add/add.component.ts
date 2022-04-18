@@ -83,8 +83,8 @@ export class AddComponent implements OnInit {
   }
 
   onSumbit() {
-    console.log(this.contactForm.value);
-    
+    console.log(this.contactForm.getRawValue());
+
     // if (this.editMode) {
     //   this.contactService.updateConact(this.id, this.contactForm.value);
     // } else {
