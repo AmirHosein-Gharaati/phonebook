@@ -6,7 +6,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ContactService } from 'src/app/core/services/contact.service';
+import { Contact } from 'src/app/shared/models/contact.model';
 
 @Component({
   selector: 'app-add',
@@ -19,7 +21,9 @@ export class AddComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private contactService: ContactService
   ) {}
 
   ngOnInit(): void {
@@ -27,7 +31,7 @@ export class AddComponent implements OnInit {
       this.id = params['id'];
       this.editMode = params['id'] != null;
       console.log(this.editMode);
-      
+
       this.initForm();
     });
   }
@@ -38,23 +42,55 @@ export class AddComponent implements OnInit {
     let lastName = '';
     let data = new FormArray([]);
 
+    if (this.editMode) {
+      const contact: Contact = this.contactService.getContact(this.id);
+      if (!contact) {
+        this.router.navigate(['../'], { relativeTo: this.route });
+        return; // ?
+      }
+
+      imageURL = contact.imageURL;
+      firstName = contact.firstName;
+      lastName = contact.lastName;
+
+      if (contact['controlDatas']) {
+        contact.controlDatas.forEach((controlData) => {
+          data.push(this.newData(controlData.category, controlData.text));
+        });
+      }
+    }
+
     this.contactForm = this.formBuilder.group({
       imageURL: new FormControl(imageURL, Validators.required),
       firtName: new FormControl(firstName, Validators.required),
       lastName: new FormControl(lastName, Validators.required),
-      contactData: data,
+      controlDatas: data,
     });
   }
 
   get contactData(): FormArray {
-    return this.contactForm.get('contactData') as FormArray;
+    return this.contactForm.get('controlDatas') as FormArray;
   }
 
-  private newData(): FormGroup {
+  private newData(category: string = '', text: string = ''): FormGroup {
     return this.formBuilder.group({
-      category: new FormControl(null),
-      text: new FormControl(null),
+      category: new FormControl(category),
+      text: new FormControl(text),
     });
+  }
+
+  onCancel() {
+    this.router.navigate(['../'], { relativeTo: this.route });
+  }
+
+  onSumbit() {
+    if (this.editMode) {
+      this.contactService.updateConact(this.id, this.contactForm.value);
+    } else {
+      this.contactService.addContact(this.contactForm.value);
+    }
+
+    this.onCancel();
   }
 
   addCategory() {
@@ -63,10 +99,5 @@ export class AddComponent implements OnInit {
 
   removeCategory(index: number) {
     this.contactData.removeAt(index);
-  }
-
-  onSumbit() {
-    console.log(this.contactForm.value);
-    this.editMode = false;
   }
 }
