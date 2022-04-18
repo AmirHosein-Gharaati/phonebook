@@ -28,7 +28,7 @@ export class AddComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      this.id = params['id'];
+      this.id = +params['id'];
       this.editMode = params['id'] != null;
 
       this.initForm();
@@ -40,6 +40,7 @@ export class AddComponent implements OnInit {
     let firstName = '';
     let lastName = '';
     let data = new FormArray([]);
+    debugger;
 
     if (this.editMode) {
       const contact: Contact = this.contactService.getContact(this.id);
