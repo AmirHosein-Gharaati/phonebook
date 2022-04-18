@@ -6,6 +6,10 @@ import { HomeComponent } from './modules/home/pages/home/home.component';
 
 const routes: Routes = [
   {
+    path: 'add',
+    component: AddComponent,
+  },
+  {
     path: '',
     component: HomeComponent,
     children: [
@@ -14,10 +18,6 @@ const routes: Routes = [
         component: ContactDetailComponent,
       },
     ],
-  },
-  {
-    path: 'add',
-    component: AddComponent,
   },
 ];
 
