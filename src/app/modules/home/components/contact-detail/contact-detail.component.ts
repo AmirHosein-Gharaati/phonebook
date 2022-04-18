@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute, Params } from '@angular/router';
 import { ContactService } from 'src/app/core/services/contact.service';
 import { Contact } from 'src/app/shared/models/contact.model';
 
@@ -9,8 +9,17 @@ import { Contact } from 'src/app/shared/models/contact.model';
 })
 export class ContactDetailComponent implements OnInit {
   selectedContact: Contact;
+  contactId: number;
 
-  constructor(private contactService: ContactService) {}
+  constructor(
+    private contactService: ContactService,
+    private route: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      this.contactId = +params['id'];
+      this.selectedContact = this.contactService.getContact(this.contactId);
+    });
+  }
 }
