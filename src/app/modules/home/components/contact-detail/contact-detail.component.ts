@@ -7,22 +7,10 @@ import { Contact } from 'src/app/shared/models/contact.model';
   selector: 'app-contact-detail',
   templateUrl: './contact-detail.component.html',
 })
-export class ContactDetailComponent implements OnInit, OnDestroy {
+export class ContactDetailComponent implements OnInit {
   selectedContact: Contact;
-  selectedContactSubs: Subscription;
 
-  constructor(private contactService: ContactService) { }
+  constructor(private contactService: ContactService) {}
 
-  ngOnInit(): void {
-    this.selectedContactSubs = this.contactService.selectedContact.subscribe(
-      (contact: Contact) => {
-        this.selectedContact = contact;
-      }
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.selectedContactSubs.unsubscribe();
-  }
-
+  ngOnInit(): void {}
 }

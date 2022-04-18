@@ -2,7 +2,6 @@
   class="contact-item"
   [routerLink]="[contact.id]"
   routerLinkActive="contact-item__active"
-  (click)="onSelectContact()"
 >
   <img [src]="contact.imageURL" />
   <span>{{ contact.firstName + " " + contact.lastName }}</span>
