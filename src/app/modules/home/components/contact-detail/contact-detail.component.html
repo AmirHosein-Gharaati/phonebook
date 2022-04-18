@@ -12,7 +12,7 @@
   <hr />
   <div class="contact-detail__buttons">
     <button class="btn btn-edit" type="button" [routerLink]="['edit']">Edit</button>
-    <button class="btn btn-delete" type="button">Delete</button>
+    <button class="btn btn-delete" type="button" (click)="onDeleteContact()">Delete</button>
   </div>
   <hr />
   <div class="contact-detail__list">
