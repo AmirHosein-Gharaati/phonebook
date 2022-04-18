@@ -41,7 +41,9 @@
     <div class="add__form-controls">
       <div class="add__form-controls__top">
         <label>Controls</label>
-        <button class="btn btn-success" type="button">Add</button>
+        <button class="btn btn-success" type="button" (click)="addCategory()">
+          Add
+        </button>
       </div>
       <hr />
       <div class="add__form-controls__list" formArrayName="contactData">
@@ -68,7 +70,7 @@
             placeholder="text"
             formGroupName="text"
           />
-          <button class="btn btn-delete">X</button>
+          <button class="btn btn-delete" (click)="removeCategory(i)">X</button>
         </div>
       </div>
     </div>

@@ -38,7 +38,7 @@ export class AddComponent implements OnInit {
     return this.contactForm.get('contactData') as FormArray;
   }
 
-  newData(): FormGroup {
+  private newData(): FormGroup {
     return this.formBuilder.group({
       category: new FormControl('', Validators.required),
       text: new FormControl('', Validators.required),
@@ -47,6 +47,10 @@ export class AddComponent implements OnInit {
 
   addCategory() {
     this.contactData.push(this.newData());
+  }
+
+  removeCategory(index: number) {
+    this.contactData.removeAt(index);
   }
 
   onSumbit() {
