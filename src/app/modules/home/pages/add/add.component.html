@@ -1,5 +1,5 @@
 <div class="add">
-  <form [formGroup]="contactForm">
+  <form [formGroup]="contactForm" (ngSubmit)="onSumbit()">
     <div class="add__image">
       <label>Image URL</label>
       <div class="add__image-wrapper">
@@ -74,6 +74,6 @@
         </div>
       </div>
     </div>
-    <button class="btn btn-success add__save-btn">Save</button>
+    <button type="submit" class="btn btn-success add__save-btn">Save</button>
   </form>
 </div>
