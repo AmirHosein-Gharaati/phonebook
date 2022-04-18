@@ -6,6 +6,12 @@
   margin-bottom: $margin-default;
   padding: 0 $padding-small;
   border-radius: $border-large;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: rgba(170, 170, 170, 0.8);
+  }
 
   img {
     border-radius: $border-large;
