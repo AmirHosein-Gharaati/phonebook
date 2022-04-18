@@ -66,6 +66,12 @@
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-success add__save-btn">Save</button>
+    <button
+      type="submit"
+      class="btn add__save-btn"
+      [ngClass]="editMode ? 'btn-edit' : 'btn-success'"
+    >
+      {{ editMode ? "Edit" : "Save" }}
+    </button>
   </form>
 </div>
