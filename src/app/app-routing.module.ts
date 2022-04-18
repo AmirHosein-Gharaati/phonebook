@@ -8,12 +8,12 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    children: [
-      {
-        path: ':id',
-        component: ContactDetailComponent,
-      },
-    ],
+    // children: [
+    //   {
+    //     path: ':id',
+    //     component: ContactDetailComponent,
+    //   },
+    // ],
   },
   {
     path: 'add',
