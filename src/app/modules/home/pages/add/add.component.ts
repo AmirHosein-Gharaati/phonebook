@@ -24,18 +24,18 @@ export class AddComponent implements OnInit {
     let imageURL = '';
     let firstName = '';
     let lastName = '';
-    let contactData = new FormArray([]);
+    let data = new FormArray([]);
 
     this.contactForm = this.formBuilder.group({
       imageURL: new FormControl(imageURL, Validators.required),
       firtName: new FormControl(firstName, Validators.required),
       lastName: new FormControl(lastName, Validators.required),
-      data: contactData,
+      contactData: data,
     });
   }
 
   get contactData(): FormArray {
-    return this.contactForm.get('data') as FormArray;
+    return this.contactForm.get('contactData') as FormArray;
   }
 
   private newData(): FormGroup {
