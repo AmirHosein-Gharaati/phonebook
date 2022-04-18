@@ -6,19 +6,31 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
 })
 export class AddComponent implements OnInit {
+  id: number;
   contactForm: FormGroup;
+  editMode: boolean = false;
 
-  constructor(private formBuilder: FormBuilder) {
-    this.initForm();
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      this.id = params['id'];
+      this.editMode = params['id'] != null;
+      console.log(this.editMode);
+      
+      this.initForm();
+    });
   }
-
-  ngOnInit(): void {}
 
   private initForm() {
     let imageURL = '';
@@ -55,5 +67,6 @@ export class AddComponent implements OnInit {
 
   onSumbit() {
     console.log(this.contactForm.value);
+    this.editMode = false;
   }
 }
