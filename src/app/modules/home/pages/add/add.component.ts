@@ -45,7 +45,7 @@ export class AddComponent implements OnInit {
       const contact: Contact = this.contactService.getContact(this.id);
       if (!contact) {
         this.router.navigate(['../'], { relativeTo: this.route });
-        return; // ?
+        return;
       }
 
       imageURL = contact.imageURL;
@@ -60,8 +60,9 @@ export class AddComponent implements OnInit {
     }
 
     this.contactForm = this.formBuilder.group({
+      id: this.id ? this.id : +this.contactService.getLength + 1,
       imageURL: new FormControl(imageURL, Validators.required),
-      firtName: new FormControl(firstName, Validators.required),
+      firstName: new FormControl(firstName, Validators.required),
       lastName: new FormControl(lastName, Validators.required),
       controlDatas: data,
     });
@@ -83,15 +84,15 @@ export class AddComponent implements OnInit {
   }
 
   onSumbit() {
-    if (this.editMode) {
-      this.contactService.updateConact(this.id, this.contactForm.value);
-    } else {
-      const newContact: Contact = {
-        id: +this.contactService.getLength + 1,
-        ...this.contactForm.value,
-      };
+    console.log(this.contactForm);
 
-      this.contactService.addContact(newContact);
+    if (this.editMode) {
+      this.contactService.updateConact(
+        this.id,
+        this.contactForm.value as Contact
+      );
+    } else {
+      this.contactService.addContact(this.contactForm.value as Contact);
     }
 
     this.onCancel();

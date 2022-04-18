@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     );
 
     this.contacts = this.contactService.getContacts();
-    console.log(this.contacts);
   }
 
   ngOnDestroy(): void {

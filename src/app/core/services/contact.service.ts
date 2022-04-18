@@ -45,12 +45,13 @@ export class ContactService {
     }
   }
 
-  getIndex(id: number): number {
-    this.contacts.forEach((contact, index) => {
-      if (contact.id === id) return index;
-      return;
-    });
-    return -1;
+  getIndex(id: number) {
+    for (let index in this.contacts) {
+      const contact = this.contacts[index];
+      if (contact.id === id) return +index;
+    }
+
+    throw new Error('Not Found!');
   }
 
   getLength(): number {
