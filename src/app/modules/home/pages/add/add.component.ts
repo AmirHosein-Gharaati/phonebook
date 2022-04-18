@@ -41,7 +41,7 @@ export class AddComponent implements OnInit {
   private newData(): FormGroup {
     return this.formBuilder.group({
       category: new FormControl(null),
-      text: new FormControl(null, Validators.required),
+      text: new FormControl(null),
     });
   }
 
