@@ -1,4 +1,8 @@
-<div class="contact-item">
+<div
+  class="contact-item"
+  [routerLink]="[contact.id]"
+  routerLinkActive="contact-item__active"
+>
   <img [src]="contact.imageURL" />
   <span>{{ contact.firstName + " " + contact.lastName }}</span>
 </div>
