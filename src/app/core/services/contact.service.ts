@@ -18,14 +18,25 @@ export class ContactService {
       'https://raw.githubusercontent.com/AmirHosein-Gharaati/portfolio/master/src/assets/images/me.png',
       'Amirhosein',
       'Gharaati',
-      [new ControlData(CDCategories.PHONE_NUMBER, '+98 936 572 31 24')]
+      [
+        {
+          category: CDCategories.PHONE_NUMBER,
+          text: '+98 936 572 31 24',
+        },
+      ]
     ),
     new Contact(
       2,
       'https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png',
       'Rouholah',
       'Mahjoub',
-      [new ControlData(CDCategories.PHONE_NUMBER, '+98 917 654 32 10')]
+
+      [
+        {
+          category: CDCategories.PHONE_NUMBER,
+          text: '+98 936 572 31 24',
+        },
+      ]
     ),
   ];
 

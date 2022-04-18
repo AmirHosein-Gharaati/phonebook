@@ -4,6 +4,7 @@ export enum CDCategories {
   EMAIL = 'Email',
 }
 
-export class ControlData {
-  constructor(public category: string, public text: string) {}
+export interface ControlData {
+  category: string;
+  text: string;
 }

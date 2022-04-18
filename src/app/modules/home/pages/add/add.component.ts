@@ -30,7 +30,6 @@ export class AddComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
       this.editMode = params['id'] != null;
-      console.log(this.editMode);
 
       this.initForm();
     });
@@ -84,13 +83,15 @@ export class AddComponent implements OnInit {
   }
 
   onSumbit() {
-    if (this.editMode) {
-      this.contactService.updateConact(this.id, this.contactForm.value);
-    } else {
-      this.contactService.addContact(this.contactForm.value);
-    }
+    console.log(this.contactForm.value);
+    
+    // if (this.editMode) {
+    //   this.contactService.updateConact(this.id, this.contactForm.value);
+    // } else {
+    //   this.contactService.addContact(this.contactForm.value);
+    // }
 
-    this.onCancel();
+    // this.onCancel();
   }
 
   addCategory() {
