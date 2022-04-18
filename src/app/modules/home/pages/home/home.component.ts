@@ -12,7 +12,7 @@ import { Contact } from 'src/app/shared/models/contact.model';
 export class HomeComponent implements OnInit, OnDestroy {
   faMagnifyingGlass = faMagnifyingGlass;
   contacts: Contact[] = [];
-  contactsSubscription: Subscription; // ?
+  contactsSubscription: Subscription;
 
   constructor(private contactService: ContactService) {}
 
