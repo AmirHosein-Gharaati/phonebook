@@ -74,6 +74,12 @@
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-success add__save-btn">Save</button>
+    <button
+      type="submit"
+      class="btn btn-success add__save-btn"
+      [disabled]="contactForm.invalid"
+    >
+      Save
+    </button>
   </form>
 </div>
