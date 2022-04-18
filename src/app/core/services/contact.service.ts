@@ -41,7 +41,7 @@ export class ContactService {
     if (item.length) {
       return item[0];
     } else {
-      throw new Error('Not Found!');
+      throw new Error('No contact found with this id: ' + id);
     }
   }
 
