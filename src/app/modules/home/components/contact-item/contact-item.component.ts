@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ContactService } from 'src/app/core/services/contact.service';
 import { Contact } from 'src/app/shared/models/contact.model';
 
 @Component({
@@ -7,11 +8,13 @@ import { Contact } from 'src/app/shared/models/contact.model';
 })
 export class ContactItemComponent implements OnInit {
   @Input() contact: Contact;
+  selectedContact: Contact;
 
-  constructor() { }
+  constructor(private contactService: ContactService) {}
 
-  ngOnInit(): void {
-    
+  ngOnInit(): void {}
+
+  onSelectContact() {
+    this.contactService.selectedContact.next(this.contact);
   }
-
 }
