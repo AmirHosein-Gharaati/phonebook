@@ -30,18 +30,18 @@ export class AddComponent implements OnInit {
       imageURL: new FormControl(imageURL, Validators.required),
       firtName: new FormControl(firstName, Validators.required),
       lastName: new FormControl(lastName, Validators.required),
-      contactData: contactData,
+      data: contactData,
     });
   }
 
   get contactData(): FormArray {
-    return this.contactForm.get('contactData') as FormArray;
+    return this.contactForm.get('data') as FormArray;
   }
 
   private newData(): FormGroup {
     return this.formBuilder.group({
-      category: new FormControl('', Validators.required),
-      text: new FormControl('', Validators.required),
+      category: new FormControl(null),
+      text: new FormControl(null, Validators.required),
     });
   }
 

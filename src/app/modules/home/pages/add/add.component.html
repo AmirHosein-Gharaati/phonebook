@@ -46,7 +46,7 @@
         </button>
       </div>
       <hr />
-      <div class="add__form-controls__list" formArrayName="contactData">
+      <div class="add__form-controls__list" formArrayName="data">
         <div
           class="add__form-item"
           *ngFor="let ctrl of contactData.controls; let i = index"
@@ -58,15 +58,11 @@
           />
           <input
             class="input"
-            type="text"
-            name="category"
             placeholder="Category"
             formGroupName="category"
           />
           <input
             class="input"
-            type="text"
-            name="text"
             placeholder="text"
             formGroupName="text"
           />
@@ -77,7 +73,6 @@
     <button
       type="submit"
       class="btn btn-success add__save-btn"
-      [disabled]="contactForm.invalid"
     >
       Save
     </button>
