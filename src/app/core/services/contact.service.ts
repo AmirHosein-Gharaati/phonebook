@@ -13,31 +13,19 @@ export class ContactService {
   contactsChanged = new Subject<Contact[]>();
 
   private contacts: Contact[] = [
-    new Contact(
-      1,
-      'https://raw.githubusercontent.com/AmirHosein-Gharaati/portfolio/master/src/assets/images/me.png',
-      'Amirhosein',
-      'Gharaati',
-      [
+    {
+      id: 1,
+      imageURL:
+        'https://raw.githubusercontent.com/AmirHosein-Gharaati/portfolio/master/src/assets/images/me.png',
+      firstName: 'Amirhosein',
+      lastName: 'Gharaati',
+      controlDatas: [
         {
           category: CDCategories.PHONE_NUMBER,
           text: '+98 936 572 31 24',
         },
-      ]
-    ),
-    new Contact(
-      2,
-      'https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png',
-      'Rouholah',
-      'Mahjoub',
-
-      [
-        {
-          category: CDCategories.PHONE_NUMBER,
-          text: '+98 936 572 31 24',
-        },
-      ]
-    ),
+      ],
+    },
   ];
 
   constructor() {}
@@ -48,7 +36,7 @@ export class ContactService {
 
   getContact(id: number): Contact {
     const item: Array<Contact> = this.contacts.filter(
-      (contact, i) => contact.id === id
+      (contact) => contact.id === id
     );
     if (item.length) {
       return item[0];
@@ -63,6 +51,10 @@ export class ContactService {
       return;
     });
     return -1;
+  }
+
+  getLength(): number {
+    return this.contacts.length;
   }
 
   addContact(contact: Contact) {

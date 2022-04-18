@@ -40,7 +40,6 @@ export class AddComponent implements OnInit {
     let firstName = '';
     let lastName = '';
     let data = new FormArray([]);
-    debugger;
 
     if (this.editMode) {
       const contact: Contact = this.contactService.getContact(this.id);
@@ -84,15 +83,18 @@ export class AddComponent implements OnInit {
   }
 
   onSumbit() {
-    console.log(this.contactForm.getRawValue());
+    if (this.editMode) {
+      this.contactService.updateConact(this.id, this.contactForm.value);
+    } else {
+      const newContact: Contact = {
+        id: +this.contactService.getLength + 1,
+        ...this.contactForm.value,
+      };
 
-    // if (this.editMode) {
-    //   this.contactService.updateConact(this.id, this.contactForm.value);
-    // } else {
-    //   this.contactService.addContact(this.contactForm.value);
-    // }
+      this.contactService.addContact(newContact);
+    }
 
-    // this.onCancel();
+    this.onCancel();
   }
 
   addCategory() {
