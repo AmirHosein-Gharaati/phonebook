@@ -11,6 +11,7 @@ import {
 })
 export class ContactService {
   contactsChanged = new Subject<Contact[]>();
+  selectedContact = new Subject<Contact>();
 
   private contacts: Contact[] = [
     new Contact(

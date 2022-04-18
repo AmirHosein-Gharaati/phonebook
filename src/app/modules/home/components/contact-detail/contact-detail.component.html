@@ -2,10 +2,12 @@
   <div class="contact-detail__main">
     <img
       class="contact-detail__main__image"
-      src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
+      [src]="selectedContact.imageURL"
       alt=""
     />
-    <h3 class="contact-detail__main__name">Amirhosein Gharaati</h3>
+    <h3 class="contact-detail__main__name">
+      {{ selectedContact.firstName + " " + selectedContact.lastName }}
+    </h3>
   </div>
   <hr />
   <div class="contact-detail__buttons">
@@ -14,14 +16,17 @@
   </div>
   <hr />
   <div class="contact-detail__list">
-    <div class="contact-detail__item">
+    <div
+      class="contact-detail__item"
+      *ngFor="let control of selectedContact.controlDatas"
+    >
       <img
         class="contact-detail__item__icon"
         src="https://cdn4.iconfinder.com/data/icons/social-media-2097/94/phone-512.png"
         alt=""
       />
-      <span class="contact-detail__item__type">Phone</span>
-      <span class="contact-detail__item__text">+98 936 572 31 24</span>
+      <span class="contact-detail__item__type">{{ control.category }}</span>
+      <span class="contact-detail__item__text">{{ control.text }}</span>
     </div>
   </div>
 </div>
