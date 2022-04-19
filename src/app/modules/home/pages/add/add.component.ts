@@ -76,10 +76,26 @@ export class AddComponent implements OnInit {
   }
 
   private newData(category: string = '', text: string = ''): FormGroup {
-    return this.formBuilder.group({
+    const form = this.formBuilder.group({
       category: new FormControl(category, Validators.required),
-      text: new FormControl(text, Validators.required),
+      text: new FormControl(text),
     });
+
+    const cat: FormControl = form.get('category') as FormControl;
+    const tex: FormControl = form.get('text') as FormControl;
+
+    cat.valueChanges.subscribe((categoryType) => {
+      if (
+        categoryType == CDCategories.PHONE_NUMBER ||
+        categoryType == CDCategories.HOME_NUMBER
+      ) {
+        tex.setValidators(Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'));
+      } else if (categoryType == CDCategories.EMAIL) {
+        tex.setValidators(Validators.email);
+      }
+    });
+
+    return form;
   }
 
   private getComponentId(params: Params) {

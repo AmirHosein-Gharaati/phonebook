@@ -22,7 +22,7 @@ export class ContactService {
       controlDatas: [
         {
           category: CDCategories.PHONE_NUMBER,
-          text: '+98 936 572 31 24',
+          text: '9365723124',
         },
       ],
     },
