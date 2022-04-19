@@ -4,8 +4,12 @@
       <label>Image URL</label>
       <div class="add__image-wrapper">
         <img
+          *ngIf="!validImage"
           src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
-          alt=""
+        />
+        <img
+          *ngIf="validImage"
+          [src]="imageurl"
         />
         <input
           class="input"
@@ -53,11 +57,6 @@
             src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
             alt="icon"
           />
-          <!-- <input
-            class="input"
-            placeholder="Category"
-            formControlName="category"
-          /> -->
           <select formControlName="category" class="select">
             <option [value]="controlDataOptions.PHONE_NUMBER">
               {{ controlDataOptions.PHONE_NUMBER }}

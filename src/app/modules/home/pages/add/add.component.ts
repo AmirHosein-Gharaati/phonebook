@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -13,11 +12,11 @@ import {
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import {
+  catchError,
   debounceTime,
   distinctUntilChanged,
   map,
   switchMap,
-  catchError,
 } from 'rxjs/operators';
 import { ContactService } from 'src/app/core/services/contact.service';
 import { Contact } from 'src/app/shared/models/contact.model';
@@ -38,8 +37,7 @@ export class AddComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private contactService: ContactService,
-    private http: HttpClient
+    private contactService: ContactService
   ) {}
 
   ngOnInit(): void {
@@ -87,6 +85,10 @@ export class AddComponent implements OnInit {
 
   get contactData(): FormArray {
     return this.contactForm.get('controlDatas') as FormArray;
+  }
+
+  get imageurl(): string {
+    return this.contactForm.get('imageURL')?.value;
   }
 
   private newData(category: string = '', text: string = ''): FormGroup {
@@ -147,23 +149,26 @@ export class AddComponent implements OnInit {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       const imageURL: string = control.value;
 
-      if (!control.valueChanges) {
-        return of(null);
-      } else {
-        return control.valueChanges
-          .pipe(
-            debounceTime(500),
-            distinctUntilChanged(),
-            switchMap((value) =>
-              this.contactService.fetchValidImageURL(imageURL)
-            ),
-            map((data: any) => {
-              this.validImage = data.type.startsWith('image/');
-              return this.validImage ? null : { invalidAsync: true };
-            })
-          )
-          .pipe(catchError((err) => of({ invalidAsync: true })));
-      }
+      if (!control.valueChanges) return of(null);
+
+      return control.valueChanges
+        .pipe(
+          debounceTime(500),
+          distinctUntilChanged(),
+          switchMap((value) =>
+            this.contactService.fetchValidImageURL(imageURL)
+          ),
+          map((data: any) => {
+            this.validImage = data.type.startsWith('image/');
+            return this.validImage ? null : { invalidAsync: true };
+          })
+        )
+        .pipe(
+          catchError((err) => {
+            this.validImage = false;
+            return of({ invalidAsync: true });
+          })
+        );
     };
   }
 }
