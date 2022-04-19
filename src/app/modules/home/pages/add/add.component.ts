@@ -15,9 +15,9 @@ import { Observable, of } from 'rxjs';
 import {
   debounceTime,
   distinctUntilChanged,
-  first,
   map,
   switchMap,
+  catchError,
 } from 'rxjs/operators';
 import { ContactService } from 'src/app/core/services/contact.service';
 import { Contact } from 'src/app/shared/models/contact.model';
@@ -150,18 +150,19 @@ export class AddComponent implements OnInit {
       if (!control.valueChanges) {
         return of(null);
       } else {
-        return control.valueChanges.pipe(
-          debounceTime(500),
-          distinctUntilChanged(),
-          switchMap((value) =>
-            this.contactService.fetchValidImageURL(imageURL)
-          ),
-          map((data: any) => {
-            this.validImage = data.type.startsWith('image/');
-            return this.validImage ? null : { invalidAsync: true };
-          }),
-          first()
-        );
+        return control.valueChanges
+          .pipe(
+            debounceTime(500),
+            distinctUntilChanged(),
+            switchMap((value) =>
+              this.contactService.fetchValidImageURL(imageURL)
+            ),
+            map((data: any) => {
+              this.validImage = data.type.startsWith('image/');
+              return this.validImage ? null : { invalidAsync: true };
+            })
+          )
+          .pipe(catchError((err) => of({ invalidAsync: true })));
       }
     };
   }
