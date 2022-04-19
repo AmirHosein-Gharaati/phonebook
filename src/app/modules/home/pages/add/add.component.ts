@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  AbstractControl,
+  AsyncValidatorFn,
   FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 import { ContactService } from 'src/app/core/services/contact.service';
 import { Contact } from 'src/app/shared/models/contact.model';
 import { CDCategories } from 'src/app/shared/models/control-data.model';
@@ -20,6 +25,7 @@ export class AddComponent implements OnInit {
   contactForm: FormGroup;
   editMode: boolean = false;
   controlDataOptions = CDCategories;
+  http: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -64,7 +70,7 @@ export class AddComponent implements OnInit {
 
     this.contactForm = this.formBuilder.group({
       id: this.id,
-      imageURL: new FormControl(imageURL, Validators.required),
+      imageURL: new FormControl(imageURL, [], this.imageValidator()),
       firstName: new FormControl(firstName, Validators.required),
       lastName: new FormControl(lastName, Validators.required),
       controlDatas: data,
@@ -89,7 +95,9 @@ export class AddComponent implements OnInit {
         categoryType == CDCategories.PHONE_NUMBER ||
         categoryType == CDCategories.HOME_NUMBER
       ) {
-        textControl.setValidators(Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'));
+        textControl.setValidators(
+          Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')
+        );
       } else if (categoryType == CDCategories.EMAIL) {
         textControl.setValidators(Validators.email);
       }
@@ -125,5 +133,19 @@ export class AddComponent implements OnInit {
 
   removeCategory(index: number) {
     this.contactData.removeAt(index);
+  }
+
+  imageValidator(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      const imageURL: string = control.value;
+
+      return this.http.get(imageURL).pipe(
+        debounceTime(500),
+        map((data: any) => {
+          if (!data.isValid) return { InValid: true };
+          return null;
+        })
+      );
+    };
   }
 }
