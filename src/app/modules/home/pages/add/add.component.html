@@ -56,11 +56,22 @@
             src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
             alt="icon"
           />
-          <input
+          <!-- <input
             class="input"
             placeholder="Category"
             formControlName="category"
-          />
+          /> -->
+          <select>
+            <option [value]="controlDataOptions.PHONE_NUMBER">
+              {{ controlDataOptions.PHONE_NUMBER }}
+            </option>
+            <option [value]="controlDataOptions.HOME_NUMBER">
+              {{ controlDataOptions.HOME_NUMBER }}
+            </option>
+            <option [value]="controlDataOptions.EMAIL">
+              {{ controlDataOptions.EMAIL }}
+            </option>
+          </select>
           <input class="input" placeholder="text" formControlName="text" />
           <button class="btn btn-delete" (click)="removeCategory(i)">X</button>
         </div>

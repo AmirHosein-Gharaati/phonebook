@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ContactService } from 'src/app/core/services/contact.service';
 import { Contact } from 'src/app/shared/models/contact.model';
+import { CDCategories } from 'src/app/shared/models/control-data.model';
 
 @Component({
   selector: 'app-add',
@@ -18,6 +19,7 @@ export class AddComponent implements OnInit {
   id: number;
   contactForm: FormGroup;
   editMode: boolean = false;
+  controlDataOptions = CDCategories;
 
   constructor(
     private formBuilder: FormBuilder,
