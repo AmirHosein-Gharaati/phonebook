@@ -4,6 +4,7 @@
   border-radius: $border-small;
   outline: none;
   padding: 0 $padding-small;
+  margin-right: $margin-default;
 
   &.ng-invalid.ng-touched {
     border: 2px solid red;
