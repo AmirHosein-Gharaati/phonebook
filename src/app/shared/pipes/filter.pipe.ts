@@ -1,18 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Contact } from '../models/contact.model';
 
 @Pipe({
   name: 'filter',
 })
 export class FilterPipe implements PipeTransform {
-  transform(items: any[], searchText: string): any[] {
+  transform(items: Contact[], searchText: string): Contact[] {
     searchText = searchText.toLowerCase();
 
     return items.filter((item) => {
-      if (item.firstName && item.lastName) {
-        const fullName = (item.firstName + ' ' + item.lastName).toLowerCase();
-        return fullName.includes(searchText);
-      }
-      return false;
+      const fullName = (item.firstName + ' ' + item.lastName).toLowerCase();
+      return fullName.includes(searchText);
     });
   }
 }
