@@ -46,8 +46,10 @@ export class AddComponent implements OnInit {
     let data = new FormArray([]);
 
     if (this.editMode) {
-      const contact = this.contactService.getContact(this.id);
-      if (!contact) {
+      let contact;
+      try {
+        contact = this.contactService.getContact(this.id);
+      } catch (error) {
         this.router.navigate(['../'], { relativeTo: this.route });
         return;
       }
