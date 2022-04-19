@@ -81,17 +81,17 @@ export class AddComponent implements OnInit {
       text: new FormControl(text),
     });
 
-    const cat: FormControl = form.get('category') as FormControl;
-    const tex: FormControl = form.get('text') as FormControl;
+    const categoryControl: FormControl = form.get('category') as FormControl;
+    const textControl: FormControl = form.get('text') as FormControl;
 
-    cat.valueChanges.subscribe((categoryType) => {
+    categoryControl.valueChanges.subscribe((categoryType) => {
       if (
         categoryType == CDCategories.PHONE_NUMBER ||
         categoryType == CDCategories.HOME_NUMBER
       ) {
-        tex.setValidators(Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'));
+        textControl.setValidators(Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'));
       } else if (categoryType == CDCategories.EMAIL) {
-        tex.setValidators(Validators.email);
+        textControl.setValidators(Validators.email);
       }
     });
 
