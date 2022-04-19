@@ -8,8 +8,8 @@ export class FilterPipe implements PipeTransform {
   transform(items: Contact[], searchText: string): Contact[] {
     searchText = searchText.toLowerCase();
 
-    return items.filter((item) => {
-      const fullName = (item.firstName + ' ' + item.lastName).toLowerCase();
+    return items.filter((contact) => {
+      const fullName = (contact.firstName + ' ' + contact.lastName).toLowerCase();
       return fullName.includes(searchText);
     });
   }
