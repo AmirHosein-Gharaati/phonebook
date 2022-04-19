@@ -3,11 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { ContactDetailComponent } from './modules/home/components/contact-detail/contact-detail.component';
 import { AddComponent } from './modules/home/pages/add/add.component';
 import { HomeComponent } from './modules/home/pages/home/home.component';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 
 const routes: Routes = [
   {
     path: 'add',
     component: AddComponent,
+  },
+  {
+    path: 'not-found',
+    component: NotFoundComponent,
   },
   {
     path: '',
@@ -22,6 +27,10 @@ const routes: Routes = [
         component: AddComponent,
       },
     ],
+  },
+  {
+    path: '**',
+    redirectTo: 'not-found',
   },
 ];
 

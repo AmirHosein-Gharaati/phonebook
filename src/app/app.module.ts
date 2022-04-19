@@ -13,6 +13,7 @@ import { AddComponent } from './modules/home/pages/add/add.component';
 import { ContactDetailComponent } from './modules/home/components/contact-detail/contact-detail.component';
 import { ContactItemComponent } from './modules/home/components/contact-item/contact-item.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ShortenPipe,
     AddComponent,
     ContactDetailComponent,
-    ContactItemComponent
+    ContactItemComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
