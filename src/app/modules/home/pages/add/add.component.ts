@@ -30,11 +30,8 @@ export class AddComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      this.id = +params['id']
-        ? +params['id']
-        : this.contactService.getLength() + 1;
+      this.id = this.getComponentId(params);
       this.editMode = params['id'] != null;
-
       this.initForm();
     });
   }
@@ -83,6 +80,10 @@ export class AddComponent implements OnInit {
       category: new FormControl(category, Validators.required),
       text: new FormControl(text, Validators.required),
     });
+  }
+
+  private getComponentId(params: Params) {
+    return +params['id'] ? +params['id'] : this.contactService.getLength() + 1;
   }
 
   onCancel() {
