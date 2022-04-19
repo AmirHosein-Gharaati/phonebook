@@ -26,6 +26,19 @@ export class ContactService {
         },
       ],
     },
+    {
+      id: 2,
+      imageURL:
+        '../../../assets/images/rouholah.jpg',
+      firstName: 'Rouholah',
+      lastName: 'Mahjoub',
+      controlDatas: [
+        {
+          category: CDCategories.PHONE_NUMBER,
+          text: '9176543210',
+        },
+      ],
+    },
   ];
 
   constructor() {}
