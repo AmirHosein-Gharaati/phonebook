@@ -11,8 +11,12 @@
   </div>
   <hr />
   <div class="contact-detail__buttons">
-    <button class="btn btn-edit" type="button" [routerLink]="['edit']">Edit</button>
-    <button class="btn btn-delete" type="button" (click)="onDeleteContact()">Delete</button>
+    <button class="btn btn-edit" type="button" [routerLink]="['edit']">
+      Edit
+    </button>
+    <button class="btn btn-delete" type="button" (click)="onDeleteContact()">
+      Delete
+    </button>
   </div>
   <hr />
   <div class="contact-detail__list">
@@ -22,7 +26,15 @@
     >
       <img
         class="contact-detail__item__icon"
-        src="https://cdn4.iconfinder.com/data/icons/social-media-2097/94/phone-512.png"
+        [src]="
+          control.category === categories.EMAIL
+            ? 'https://www.nidirect.gov.uk/sites/default/files/styles/nigov_full_620_x1/public/images/email_logo.jpg?itok=ifUhNgCT'
+            : control.category === categories.PHONE_NUMBER
+            ? 'https://cdn4.iconfinder.com/data/icons/social-media-2097/94/phone-512.png'
+            : control.category === categories.HOME_NUMBER
+            ? 'https://cdn4.iconfinder.com/data/icons/network-and-communication-2-10/48/97-512.png'
+            : ''
+        "
         alt=""
       />
       <span class="contact-detail__item__type">{{ control.category }}</span>

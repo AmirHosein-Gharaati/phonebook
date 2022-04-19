@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ContactService } from 'src/app/core/services/contact.service';
 import { Contact } from 'src/app/shared/models/contact.model';
+import { CDCategories } from 'src/app/shared/models/control-data.model';
 
 @Component({
   selector: 'app-contact-detail',
@@ -10,6 +11,7 @@ import { Contact } from 'src/app/shared/models/contact.model';
 export class ContactDetailComponent implements OnInit {
   selectedContact: Contact;
   contactId: number;
+  categories = CDCategories;
 
   constructor(
     private contactService: ContactService,
