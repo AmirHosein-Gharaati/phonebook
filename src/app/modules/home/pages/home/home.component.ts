@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   faMagnifyingGlass = faMagnifyingGlass;
   contacts: Contact[] = [];
   contactsSubscription: Subscription;
+  searchText = '';
 
   constructor(private contactService: ContactService) {}
 

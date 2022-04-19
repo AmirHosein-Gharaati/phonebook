@@ -14,6 +14,7 @@ import { ContactDetailComponent } from './modules/home/components/contact-detail
 import { ContactItemComponent } from './modules/home/components/contact-item/contact-item.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
+import { FilterPipe } from './shared/pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
     AddComponent,
     ContactDetailComponent,
     ContactItemComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
