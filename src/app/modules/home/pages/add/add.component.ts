@@ -55,6 +55,7 @@ export class AddComponent implements OnInit {
     let data = new FormArray([]);
 
     if (this.editMode) {
+      this.validImage = true;
       let contact;
       try {
         contact = this.contactService.getContact(this.id);
@@ -153,7 +154,9 @@ export class AddComponent implements OnInit {
 
       return control.valueChanges
         .pipe(
+          map(() => (this.validImage = false)),
           debounceTime(500),
+
           distinctUntilChanged(),
           switchMap((value) =>
             this.contactService.fetchValidImageURL(imageURL)
