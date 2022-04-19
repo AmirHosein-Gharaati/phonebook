@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Contact } from 'src/app/shared/models/contact.model';
@@ -28,8 +29,7 @@ export class ContactService {
     },
     {
       id: 2,
-      imageURL:
-        '../../../assets/images/rouholah.jpg',
+      imageURL: '../../../assets/images/rouholah.jpg',
       firstName: 'Rouholah',
       lastName: 'Mahjoub',
       controlDatas: [
@@ -41,7 +41,7 @@ export class ContactService {
     },
   ];
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getContacts(): Contact[] {
     return this.contacts.slice();
@@ -92,5 +92,9 @@ export class ContactService {
     const index = this.getIndex(contact.id);
     this.contacts.splice(index, 1);
     this.contactsChanged.next(this.contacts.slice());
+  }
+
+  fetchValidImageURL(url: string) {
+    return this.http.get(url, { responseType: 'blob' });
   }
 }

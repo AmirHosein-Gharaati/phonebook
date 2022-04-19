@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -10,8 +11,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { debounceTime, map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  first,
+  map,
+  switchMap,
+} from 'rxjs/operators';
 import { ContactService } from 'src/app/core/services/contact.service';
 import { Contact } from 'src/app/shared/models/contact.model';
 import { CDCategories } from 'src/app/shared/models/control-data.model';
@@ -25,13 +32,14 @@ export class AddComponent implements OnInit {
   contactForm: FormGroup;
   editMode: boolean = false;
   controlDataOptions = CDCategories;
-  http: any;
+  validImage: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private contactService: ContactService
+    private contactService: ContactService,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -139,13 +147,22 @@ export class AddComponent implements OnInit {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       const imageURL: string = control.value;
 
-      return this.http.get(imageURL).pipe(
-        debounceTime(500),
-        map((data: any) => {
-          if (!data.isValid) return { InValid: true };
-          return null;
-        })
-      );
+      if (!control.valueChanges) {
+        return of(null);
+      } else {
+        return control.valueChanges.pipe(
+          debounceTime(500),
+          distinctUntilChanged(),
+          switchMap((value) =>
+            this.contactService.fetchValidImageURL(imageURL)
+          ),
+          map((data: any) => {
+            this.validImage = data.type.startsWith('image/');
+            return this.validImage ? null : { invalidAsync: true };
+          }),
+          first()
+        );
+      }
     };
   }
 }
