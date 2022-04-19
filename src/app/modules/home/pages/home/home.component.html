@@ -3,10 +3,10 @@
     <div class="home__search">
       <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
       <input
-        [(ngModel)]="searchText"
         class="input-search"
         type="text"
         name="search"
+        #searchInput
         appSearch
       />
       <hr />
