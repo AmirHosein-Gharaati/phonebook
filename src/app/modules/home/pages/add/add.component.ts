@@ -46,12 +46,16 @@ export class AddComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.id = this.getComponentId(params);
       this.editMode = params['id'] != null;
-      this.initForm();
     });
+    
+    this.initForm();
+    this.validImage = this.editMode;
   }
 
-  ngAfterContentInit() {
-    this.validImage = this.editMode;
+  ngAfterViewChecked() {}
+
+  ngAfterContentInitChecked() {
+    
   }
 
   private initForm() {
@@ -73,20 +77,20 @@ export class AddComponent implements OnInit {
       firstName = contact.firstName;
       lastName = contact.lastName;
 
-      if (contact['controlDatas']) {
-        contact.controlDatas.forEach((controlData) => {
-          data.push(this.newData(controlData.category, controlData.text));
-        });
-      }
+      contact.controlDatas.forEach((controlData) => {
+        data.push(this.newData(controlData.category, controlData.text));
+      });
     }
 
     this.contactForm = this.formBuilder.group({
       id: this.id,
-      imageURL: new FormControl(imageURL, [], this.imageValidator()),
+      imageURL: new FormControl(imageURL, Validators.required),
       firstName: new FormControl(firstName, Validators.required),
       lastName: new FormControl(lastName, Validators.required),
       controlDatas: data,
     });
+
+    (<FormControl>this.contactForm.get('firstName')).updateValueAndValidity();
   }
 
   get contactData(): FormArray {
@@ -95,10 +99,6 @@ export class AddComponent implements OnInit {
 
   get imageurl(): string {
     return this.contactForm.get('imageURL')?.value;
-  }
-
-  get properImagetoShow(): string {
-    return this.validImage ? this.imageurl : this.defaultProfileImageURL;
   }
 
   set imageurl(url: string) {
