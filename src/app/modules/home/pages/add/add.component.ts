@@ -50,6 +50,10 @@ export class AddComponent implements OnInit {
     });
   }
 
+  ngAfterContentInit() {
+    this.validImage = this.editMode;
+  }
+
   private initForm() {
     let imageURL = '';
     let firstName = '';
@@ -57,7 +61,6 @@ export class AddComponent implements OnInit {
     let data = new FormArray([]);
 
     if (this.editMode) {
-      this.validImage = true;
       let contact;
       try {
         contact = this.contactService.getContact(this.id);
@@ -92,6 +95,10 @@ export class AddComponent implements OnInit {
 
   get imageurl(): string {
     return this.contactForm.get('imageURL')?.value;
+  }
+
+  get properImagetoShow(): string {
+    return this.validImage ? this.imageurl : this.defaultProfileImageURL;
   }
 
   set imageurl(url: string) {
@@ -161,7 +168,7 @@ export class AddComponent implements OnInit {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       const imageURL: string = control.value;
 
-      if (!control.valueChanges) return of(null);
+      if (!control.value) return of(null);
 
       return control.valueChanges
         .pipe(
