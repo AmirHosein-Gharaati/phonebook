@@ -3,13 +3,7 @@
     <div class="add__image">
       <label>Image URL</label>
       <div class="add__image-wrapper">
-        <img
-          [src]="
-            validImage
-              ? imageurl
-              : 'https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png'
-          "
-        />
+        <img [src]="validImage ? imageurl : defaultProfileImageURL" />
         <input
           class="input"
           type="text"
@@ -53,7 +47,15 @@
           [formGroupName]="i"
         >
           <img
-            src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
+            [src]="
+              ctrl.value.category === controlDataOptions.EMAIL
+                ? 'https://www.nidirect.gov.uk/sites/default/files/styles/nigov_full_620_x1/public/images/email_logo.jpg?itok=ifUhNgCT'
+                : ctrl.value.category === controlDataOptions.PHONE_NUMBER
+                ? 'https://cdn4.iconfinder.com/data/icons/social-media-2097/94/phone-512.png'
+                : ctrl.value.category === controlDataOptions.HOME_NUMBER
+                ? 'https://cdn4.iconfinder.com/data/icons/network-and-communication-2-10/48/97-512.png'
+                : defaultProfileImageURL
+            "
             alt="icon"
           />
           <select formControlName="category" class="select">

@@ -32,6 +32,8 @@ export class AddComponent implements OnInit {
   editMode: boolean = false;
   controlDataOptions = CDCategories;
   validImage: boolean;
+  defaultProfileImageURL: string =
+    'https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -92,6 +94,12 @@ export class AddComponent implements OnInit {
     return this.contactForm.get('imageURL')?.value;
   }
 
+  set imageurl(url: string) {
+    this.contactForm.patchValue({
+      imageURL: url,
+    });
+  }
+
   private newData(category: string = '', text: string = ''): FormGroup {
     const form = this.formBuilder.group({
       category: new FormControl(category, Validators.required),
@@ -132,6 +140,9 @@ export class AddComponent implements OnInit {
         this.contactForm.value as Contact
       );
     } else {
+      if (!this.imageurl) {
+        this.imageurl = this.defaultProfileImageURL;
+      }
       this.contactService.addContact(this.contactForm.value as Contact);
     }
 
