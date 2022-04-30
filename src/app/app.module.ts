@@ -9,7 +9,6 @@ import { HomeComponent } from './modules/home/pages/home/home.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
-import { ShortenPipe } from './shared/pipes/shorten.pipe';
 import { AddComponent } from './modules/home/pages/add/add.component';
 import { ContactDetailComponent } from './modules/home/components/contact-detail/contact-detail.component';
 import { ContactItemComponent } from './modules/home/components/contact-item/contact-item.component';
@@ -24,7 +23,6 @@ import { FilterPipe } from './shared/pipes/filter.pipe';
     HeaderComponent,
     FooterComponent,
     LoaderComponent,
-    ShortenPipe,
     AddComponent,
     ContactDetailComponent,
     ContactItemComponent,
