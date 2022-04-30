@@ -7,7 +7,7 @@ import {
   FormControl,
   FormGroup,
   ValidationErrors,
-  Validators,
+  Validators
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -16,7 +16,7 @@ import {
   debounceTime,
   distinctUntilChanged,
   map,
-  switchMap,
+  switchMap
 } from 'rxjs/operators';
 import { ContactService } from 'src/app/core/services/contact.service';
 import { Contact } from 'src/app/shared/models/contact.model';
@@ -47,15 +47,9 @@ export class AddComponent implements OnInit {
       this.id = this.getComponentId(params);
       this.editMode = params['id'] != null;
     });
-    
+
     this.initForm();
     this.validImage = this.editMode;
-  }
-
-  ngAfterViewChecked() {}
-
-  ngAfterContentInitChecked() {
-    
   }
 
   private initForm() {
