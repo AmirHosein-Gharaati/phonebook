@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Contact } from 'src/app/shared/models/contact.model';
 import {
-  ControlData,
-  CDCategories,
+  CDCategories
 } from 'src/app/shared/models/control-data.model';
 
 @Injectable({
