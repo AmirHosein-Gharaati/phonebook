@@ -6,31 +6,29 @@ import { Contact } from 'src/app/shared/models/contact.model';
   providedIn: 'root',
 })
 export class ApiService {
+  baseUrl = 'http://localhost:5000/api';
   constructor(private http: HttpClient) {}
 
   getContacts() {
-    return this.http.get<Contact[]>('http://localhost:5000/api/contact');
+    return this.http.get<Contact[]>(`${this.baseUrl}/contact`);
   }
 
   findContact(id: number) {
-    return this.http.get<Contact>(`http://localhost:5000/api/contact/${id}`);
+    return this.http.get<Contact>(`${this.baseUrl}/contact/${id}`);
   }
 
   addContact(contact: Contact) {
-    return this.http.post<Contact>(
-      `http://localhost:5000/api/contact`,
-      contact
-    );
+    return this.http.post<Contact>(`${this.baseUrl}/api/contact`, contact);
   }
 
   updateContact(contact: Contact) {
     return this.http.put<Contact>(
-      `http://localhost:5000/api/contact/${contact.id}`,
+      `${this.baseUrl}/api/contact/${contact.id}`,
       contact
     );
   }
 
   deleteContact(id: number) {
-    return this.http.delete(`http://localhost:5000/api/contact/${id}`);
+    return this.http.delete(`${this.baseUrl}/api/contact/${id}`);
   }
 }
