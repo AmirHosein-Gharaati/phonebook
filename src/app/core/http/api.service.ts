@@ -11,4 +11,26 @@ export class ApiService {
   getContacts() {
     return this.http.get<Contact[]>('http://localhost:5000/api/contact');
   }
+
+  getOneContact(id: number) {
+    return this.http.get<Contact>(`http://localhost:5000/api/contact/${id}`);
+  }
+
+  addContact(contact: Contact) {
+    return this.http.post<Contact>(
+      `http://localhost:5000/api/contact`,
+      contact
+    );
+  }
+
+  editContact(id: number, contact: Contact) {
+    return this.http.put<Contact>(
+      `http://localhost:5000/api/contact/${id}`,
+      contact
+    );
+  }
+
+  deleteContact(id: number) {
+    return this.http.delete(`http://localhost:5000/api/contact/${id}`);
+  }
 }
