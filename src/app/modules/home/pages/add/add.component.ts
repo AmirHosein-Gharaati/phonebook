@@ -89,8 +89,6 @@ export class AddComponent implements OnInit {
         this.router.navigate(['../'], { relativeTo: this.route });
       }
 
-      // debugger;
-
       this.contactForm.patchValue({
         imageURL: imageURL,
         firstName: firstName,
@@ -115,7 +113,7 @@ export class AddComponent implements OnInit {
   }
 
   private newData(data: ControlData | null = null): FormGroup {
-    const form = this.formBuilder.group({
+    const form: FormGroup = this.formBuilder.group({
       category: new FormControl(data?.category, Validators.required),
       text: new FormControl(data?.text),
     });
