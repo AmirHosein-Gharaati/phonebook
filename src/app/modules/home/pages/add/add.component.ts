@@ -10,7 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { lastValueFrom, Observable, of } from 'rxjs';
 import {
   catchError,
   debounceTime,
@@ -55,16 +55,17 @@ export class AddComponent implements OnInit {
     this.validImage = this.editMode;
   }
 
-  private initForm() {
+  private async initForm() {
     let imageURL = '';
     let firstName = '';
     let lastName = '';
     let data = new FormArray([]);
 
     if (this.editMode) {
-      let contact: Contact;
       try {
-        contact = this.contactService.getContact(this.id);
+        const contact = await lastValueFrom(
+          this.apiService.findContact(this.id)
+        );
 
         imageURL = contact.imageURL;
         firstName = contact.firstName;
