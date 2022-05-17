@@ -12,7 +12,7 @@ export class ApiService {
     return this.http.get<Contact[]>('http://localhost:5000/api/contact');
   }
 
-  getOneContact(id: number) {
+  findContact(id: number) {
     return this.http.get<Contact>(`http://localhost:5000/api/contact/${id}`);
   }
 
