@@ -7,7 +7,7 @@ import {
   FormControl,
   FormGroup,
   ValidationErrors,
-  Validators
+  Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -16,8 +16,9 @@ import {
   debounceTime,
   distinctUntilChanged,
   map,
-  switchMap
+  switchMap,
 } from 'rxjs/operators';
+import { ApiService } from 'src/app/core/http/api.service';
 import { ContactService } from 'src/app/core/services/contact.service';
 import { Contact } from 'src/app/shared/models/contact.model';
 import { CDCategories } from 'src/app/shared/models/control-data.model';
@@ -29,6 +30,7 @@ import { CDCategories } from 'src/app/shared/models/control-data.model';
 export class AddComponent implements OnInit {
   id: number;
   contactForm: FormGroup;
+  contact: Contact;
   editMode: boolean = false;
   controlDataOptions = CDCategories;
   validImage: boolean;
@@ -39,7 +41,8 @@ export class AddComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private contactService: ContactService
+    private contactService: ContactService,
+    private apiService: ApiService
   ) {}
 
   ngOnInit(): void {
@@ -59,21 +62,20 @@ export class AddComponent implements OnInit {
     let data = new FormArray([]);
 
     if (this.editMode) {
-      let contact;
+      let contact: Contact;
       try {
         contact = this.contactService.getContact(this.id);
+
+        imageURL = contact.imageURL;
+        firstName = contact.firstName;
+        lastName = contact.lastName;
+
+        contact.controlDatas.forEach((controlData) => {
+          data.push(this.newData(controlData.category, controlData.text));
+        });
       } catch (error) {
         this.router.navigate(['../'], { relativeTo: this.route });
-        return;
       }
-
-      imageURL = contact.imageURL;
-      firstName = contact.firstName;
-      lastName = contact.lastName;
-
-      contact.controlDatas.forEach((controlData) => {
-        data.push(this.newData(controlData.category, controlData.text));
-      });
     }
 
     this.contactForm = this.formBuilder.group({
