@@ -58,34 +58,39 @@ export class AddComponent implements OnInit {
   private async initForm() {
     this.contactForm = this.formBuilder.group({
       id: this.id,
-      imageURL: new FormControl('', Validators.required),
+      imageURL: new FormControl(null, Validators.required),
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       controlDatas: new FormArray([]),
     });
 
-    // (<FormControl>this.contactForm.get('firstName')).updateValueAndValidity();
+    (<FormControl>this.contactForm.get('firstName')).updateValueAndValidity();
 
     if (this.editMode) {
       let contact;
+      let imageURL = '';
+      let firstName = '';
+      let lastName = '';
       let data = new FormArray([]);
 
       try {
         contact = await lastValueFrom(this.apiService.findContact(this.id));
-        console.log(contact.controlDatas);
+        imageURL = contact.imageURL;
+        firstName = contact.firstName;
+        lastName = contact.lastName;
 
         contact.controlDatas.forEach((controlData) => {
           data.push(this.newData(controlData.category, controlData.text));
         });
+
       } catch (error) {
         this.router.navigate(['../'], { relativeTo: this.route });
       }
 
       this.contactForm.patchValue({
-        imageURL: new FormControl(contact?.imageURL, Validators.required),
-        firstName: new FormControl(contact?.firstName, Validators.required),
-        lastName: new FormControl(contact?.lastName, Validators.required),
-        controlDatas: data,
+        imageURL: imageURL,
+        firstName: firstName,
+        lastName: lastName,
       });
     }
   }
