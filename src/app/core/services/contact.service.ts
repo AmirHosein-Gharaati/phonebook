@@ -51,7 +51,8 @@ export class ContactService {
     this.contactsChanged.next(this.contacts.slice());
   }
 
-  updateConact(id: number, newContact: Contact) {
+  updateConact(newContact: Contact) {
+    const id = newContact.id;
     const contact = this.getContact(id);
     if (!contact) throw new Error('ID number is incorrect!');
 

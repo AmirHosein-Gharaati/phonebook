@@ -21,7 +21,10 @@ import {
 import { ApiService } from 'src/app/core/http/api.service';
 import { ContactService } from 'src/app/core/services/contact.service';
 import { Contact } from 'src/app/shared/models/contact.model';
-import { CDCategories } from 'src/app/shared/models/control-data.model';
+import {
+  CDCategories,
+  ControlData,
+} from 'src/app/shared/models/control-data.model';
 
 @Component({
   selector: 'app-add',
@@ -71,7 +74,7 @@ export class AddComponent implements OnInit {
       let imageURL = '';
       let firstName = '';
       let lastName = '';
-      let data = new FormArray([]);
+      const data = new FormArray([]);
 
       try {
         contact = await lastValueFrom(this.apiService.findContact(this.id));
@@ -80,17 +83,19 @@ export class AddComponent implements OnInit {
         lastName = contact.lastName;
 
         contact.controlDatas.forEach((controlData) => {
-          data.push(this.newData(controlData.category, controlData.text));
+          data.push(this.newData(controlData));
         });
-
       } catch (error) {
         this.router.navigate(['../'], { relativeTo: this.route });
       }
+
+      // debugger;
 
       this.contactForm.patchValue({
         imageURL: imageURL,
         firstName: firstName,
         lastName: lastName,
+        controlDatas: data,
       });
     }
   }
@@ -109,10 +114,10 @@ export class AddComponent implements OnInit {
     });
   }
 
-  private newData(category: string = '', text: string = ''): FormGroup {
+  private newData(data: ControlData | null = null): FormGroup {
     const form = this.formBuilder.group({
-      category: new FormControl(category, Validators.required),
-      text: new FormControl(text),
+      category: new FormControl(data?.category, Validators.required),
+      text: new FormControl(data?.text),
     });
 
     const categoryControl: FormControl = form.get('category') as FormControl;
@@ -144,10 +149,7 @@ export class AddComponent implements OnInit {
 
   onSumbit() {
     if (this.editMode) {
-      this.contactService.updateConact(
-        this.id,
-        this.contactForm.value as Contact
-      );
+      this.contactService.updateConact(this.contactForm.value as Contact);
     } else {
       if (!this.imageurl) {
         this.imageurl = this.defaultProfileImageURL;
