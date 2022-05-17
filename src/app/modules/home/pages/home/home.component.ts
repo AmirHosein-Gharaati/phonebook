@@ -32,6 +32,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.contacts = contacts;
       }
     );
+    console.log('Hello');
+    
 
     this.contactService.getContacts();
 

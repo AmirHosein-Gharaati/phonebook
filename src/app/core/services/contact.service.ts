@@ -46,6 +46,7 @@ export class ContactService {
   }
 
   addContact(contact: Contact) {
+    this.apiService.addContact(contact);
     this.contacts.push(contact);
     this.contactsChanged.next(this.contacts.slice());
   }
@@ -56,6 +57,7 @@ export class ContactService {
 
     const index = this.getIndex(contact.id);
     this.contacts[index] = newContact;
+    this.apiService.updateContact(contact);
     this.contactsChanged.next(this.contacts.slice());
   }
 
@@ -65,6 +67,7 @@ export class ContactService {
 
     const index = this.getIndex(contact.id);
     this.contacts.splice(index, 1);
+    this.apiService.deleteContact(contact.id);
     this.contactsChanged.next(this.contacts.slice());
   }
 

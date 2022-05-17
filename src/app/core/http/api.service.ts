@@ -23,9 +23,9 @@ export class ApiService {
     );
   }
 
-  editContact(id: number, contact: Contact) {
+  updateContact(contact: Contact) {
     return this.http.put<Contact>(
-      `http://localhost:5000/api/contact/${id}`,
+      `http://localhost:5000/api/contact/${contact.id}`,
       contact
     );
   }
