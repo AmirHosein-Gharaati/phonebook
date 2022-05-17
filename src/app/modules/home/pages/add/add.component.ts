@@ -56,20 +56,23 @@ export class AddComponent implements OnInit {
   }
 
   private async initForm() {
-    let imageURL = '';
-    let firstName = '';
-    let lastName = '';
-    let data = new FormArray([]);
+    this.contactForm = this.formBuilder.group({
+      id: this.id,
+      imageURL: new FormControl('', Validators.required),
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      controlDatas: new FormArray([]),
+    });
+
+    // (<FormControl>this.contactForm.get('firstName')).updateValueAndValidity();
 
     if (this.editMode) {
-      try {
-        const contact = await lastValueFrom(
-          this.apiService.findContact(this.id)
-        );
+      let contact;
+      let data = new FormArray([]);
 
-        imageURL = contact.imageURL;
-        firstName = contact.firstName;
-        lastName = contact.lastName;
+      try {
+        contact = await lastValueFrom(this.apiService.findContact(this.id));
+        console.log(contact.controlDatas);
 
         contact.controlDatas.forEach((controlData) => {
           data.push(this.newData(controlData.category, controlData.text));
@@ -77,17 +80,14 @@ export class AddComponent implements OnInit {
       } catch (error) {
         this.router.navigate(['../'], { relativeTo: this.route });
       }
+
+      this.contactForm.patchValue({
+        imageURL: new FormControl(contact?.imageURL, Validators.required),
+        firstName: new FormControl(contact?.firstName, Validators.required),
+        lastName: new FormControl(contact?.lastName, Validators.required),
+        controlDatas: data,
+      });
     }
-
-    this.contactForm = this.formBuilder.group({
-      id: this.id,
-      imageURL: new FormControl(imageURL, Validators.required),
-      firstName: new FormControl(firstName, Validators.required),
-      lastName: new FormControl(lastName, Validators.required),
-      controlDatas: data,
-    });
-
-    (<FormControl>this.contactForm.get('firstName')).updateValueAndValidity();
   }
 
   get contactData(): FormArray {
