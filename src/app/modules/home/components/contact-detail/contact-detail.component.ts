@@ -27,8 +27,6 @@ export class ContactDetailComponent implements OnInit {
       this.contactId = +params['id'];
       this.apiService.findContact(this.contactId).subscribe({
         next: (contact: Contact) => {
-          console.log('data: ', contact);
-
           this.selectedContact = contact;
         },
         error: (error) => {
