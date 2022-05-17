@@ -83,8 +83,9 @@ export class AddComponent implements OnInit {
         lastName = contact.lastName;
 
         contact.controlDatas.forEach((controlData) => {
-          data.push(this.newData(controlData));
+          this.contactData.push(this.newData(controlData));
         });
+
       } catch (error) {
         this.router.navigate(['../'], { relativeTo: this.route });
       }
@@ -92,8 +93,7 @@ export class AddComponent implements OnInit {
       this.contactForm.patchValue({
         imageURL: imageURL,
         firstName: firstName,
-        lastName: lastName,
-        controlDatas: data,
+        lastName: lastName
       });
     }
   }
