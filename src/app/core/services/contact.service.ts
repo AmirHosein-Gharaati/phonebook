@@ -2,9 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Contact } from 'src/app/shared/models/contact.model';
-import {
-  CDCategories
-} from 'src/app/shared/models/control-data.model';
+import { CDCategories } from 'src/app/shared/models/control-data.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,37 +11,42 @@ export class ContactService {
   contactsChanged = new Subject<Contact[]>();
 
   private contacts: Contact[] = [
-    {
-      id: 1,
-      imageURL:
-        'https://raw.githubusercontent.com/AmirHosein-Gharaati/portfolio/master/src/assets/images/me.png',
-      firstName: 'Amirhosein',
-      lastName: 'Gharaati',
-      controlDatas: [
-        {
-          category: CDCategories.PHONE_NUMBER,
-          text: '9365723124',
-        },
-      ],
-    },
-    {
-      id: 2,
-      imageURL: '../../../assets/images/rouholah.jpg',
-      firstName: 'Rouholah',
-      lastName: 'Mahjoub',
-      controlDatas: [
-        {
-          category: CDCategories.PHONE_NUMBER,
-          text: '9176543210',
-        },
-      ],
-    },
+    // {
+    //   id: 1,
+    //   imageURL:
+    //     'https://raw.githubusercontent.com/AmirHosein-Gharaati/portfolio/master/src/assets/images/me.png',
+    //   firstName: 'Amirhosein',
+    //   lastName: 'Gharaati',
+    //   controlDatas: [
+    //     {
+    //       category: CDCategories.PHONE_NUMBER,
+    //       text: '9365723124',
+    //     },
+    //   ],
+    // },
+    // {
+    //   id: 2,
+    //   imageURL: '../../../assets/images/rouholah.jpg',
+    //   firstName: 'Rouholah',
+    //   lastName: 'Mahjoub',
+    //   controlDatas: [
+    //     {
+    //       category: CDCategories.PHONE_NUMBER,
+    //       text: '9176543210',
+    //     },
+    //   ],
+    // },
   ];
 
   constructor(private http: HttpClient) {}
 
-  getContacts(): Contact[] {
-    return this.contacts.slice();
+  getContacts() {
+    this.http
+      .get<Contact[]>('http://localhost:5000/api/contact')
+      .subscribe((data: Contact[]) => {
+        this.contacts = data;
+        this.contactsChanged.next(this.contacts.slice());
+      });
   }
 
   getContact(id: number): Contact {

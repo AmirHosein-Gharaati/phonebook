@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.contacts = this.contactService.getContacts();
+    this.contactService.getContacts();
 
     this.searchInputSubscription = fromEvent(
       this.searchInput.nativeElement,
