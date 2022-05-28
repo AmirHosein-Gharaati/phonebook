@@ -1,4 +1,4 @@
-import { ControlData } from './contact.model';
+import { Contact } from './contact.model';
 
 export interface Person {
   personId: number;

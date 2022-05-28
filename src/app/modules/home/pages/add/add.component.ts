@@ -19,7 +19,7 @@ import {
   switchMap,
 } from 'rxjs/operators';
 import { ApiService } from 'src/app/core/http/api.service';
-import { PersonService } from 'src/app/core/services/contact.service';
+import { PersonService } from 'src/app/core/services/person.service';
 import { Person } from 'src/app/shared/models/person.model';
 import {
   Categories,
@@ -78,11 +78,11 @@ export class AddComponent implements OnInit {
 
       try {
         person = await lastValueFrom(this.apiService.findPerson(this.id));
-        imageURL = person.imageURL;
+        imageURL = person.imageUrl;
         firstName = person.firstName;
         lastName = person.lastName;
 
-        person.contacts.forEach((contact) => {
+        person.contact.forEach((contact) => {
           this.contactData.push(this.newData(contact));
         });
 
