@@ -36,8 +36,6 @@ export class AddComponent implements OnInit {
   contactOptions = Categories;
   IMAGES = IMAGE_URLS;
   validImage: boolean;
-  defaultProfileImageURL: string =
-    'https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -148,7 +146,7 @@ export class AddComponent implements OnInit {
       this.personService.updateConact(this.personForm.value as Person);
     } else {
       if (!this.imageurl) {
-        this.imageurl = this.defaultProfileImageURL;
+        this.imageurl = this.IMAGES.DEFAULT;
       }
       this.personService.addPerson(this.personForm.value as Person);
     }
