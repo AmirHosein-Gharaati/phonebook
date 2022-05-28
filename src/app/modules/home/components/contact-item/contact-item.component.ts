@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Contact } from 'src/app/shared/models/contact.model';
+import { Person } from 'src/app/shared/models/person.model';
 
 @Component({
   selector: 'app-contact-item',
   templateUrl: './contact-item.component.html',
 })
-export class ContactItemComponent implements OnInit {
-  @Input() contact: Contact;
-  selectedContact: Contact;
+export class PersonItemComponent implements OnInit {
+  @Input() person: Person;
+  selectedPerson: Person;
 
   ngOnInit(): void {}
 }

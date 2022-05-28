@@ -1,8 +1,8 @@
 <div
   class="contact-item"
-  [routerLink]="[contact.id]"
+  [routerLink]="[person.personId]"
   routerLinkActive="contact-item__active"
 >
-  <img [src]="contact.imageURL" />
-  <span>{{ contact.firstName + " " + contact.lastName }}</span>
+  <img [src]="person.imageUrl" />
+  <span>{{ person.firstName + " " + person.lastName }}</span>
 </div>
