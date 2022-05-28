@@ -24,6 +24,7 @@
       class="contact-detail__item"
       *ngFor="let control of selectedPerson.contact"
     >
+    {{ control.category }}
       <img
         class="contact-detail__item__icon"
         [src]="
