@@ -53,15 +53,16 @@ export class AddComponent implements OnInit {
 
     this.initForm();
     this.validImage = this.editMode;
+    
   }
 
   private async initForm() {
     this.personForm = this.formBuilder.group({
-      id: this.id,
+      personId: this.id,
       imageUrl: new FormControl(null),
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
-      contacts: new FormArray([]),
+      contact: new FormArray([]),
     });
 
     (<FormControl>this.personForm.get('firstName')).updateValueAndValidity();
@@ -75,6 +76,7 @@ export class AddComponent implements OnInit {
 
       try {
         person = await lastValueFrom(this.apiService.findPerson(this.id));
+        this.person = person;
         imageUrl = person.imageUrl;
         firstName = person.firstName;
         lastName = person.lastName;
@@ -95,7 +97,7 @@ export class AddComponent implements OnInit {
   }
 
   get contactData(): FormArray {
-    return this.personForm.get('contacts') as FormArray;
+    return this.personForm.get('contact') as FormArray;
   }
 
   get imageurl(): string {

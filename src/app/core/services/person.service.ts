@@ -46,19 +46,21 @@ export class PersonService {
   }
 
   addPerson(person: Person) {
-    this.apiService.addPerson(person);
+    this.apiService.addPerson(person).subscribe();
     this.persons.push(person);
     this.personsChanged.next(this.persons.slice());
   }
 
   updateConact(newPerson: Person) {
+    // debugger;
     const id = newPerson.personId;
     const person = this.getPerson(id);
     if (!person) throw new Error('ID number is incorrect!');
 
     const index = this.getIndex(person.personId);
     this.persons[index] = newPerson;
-    this.apiService.updatePerson(person);
+    
+    this.apiService.updatePerson(newPerson).subscribe();
     this.personsChanged.next(this.persons.slice());
   }
 
@@ -68,7 +70,7 @@ export class PersonService {
 
     const index = this.getIndex(person.personId);
     this.persons.splice(index, 1);
-    this.apiService.deletePerson(person.personId);
+    this.apiService.deletePerson(person.personId).subscribe();
     this.personsChanged.next(this.persons.slice());
   }
 
