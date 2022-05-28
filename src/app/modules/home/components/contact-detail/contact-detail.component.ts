@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ApiService } from 'src/app/core/http/api.service';
 import { PersonService } from 'src/app/core/services/person.service';
-import { Categories } from 'src/app/shared/models/contact.model';
 import { Person } from 'src/app/shared/models/person.model';
 import { IMAGE_URLS } from 'src/app/shared/image-urls.model';
 import { getProperImage } from 'src/app/shared/functions';
@@ -14,7 +13,6 @@ import { getProperImage } from 'src/app/shared/functions';
 export class ContactDetailComponent implements OnInit {
   selectedPerson: Person;
   personId: number;
-  categories = Categories;
   IMAGES = IMAGE_URLS;
   getProperImage = getProperImage;
 
