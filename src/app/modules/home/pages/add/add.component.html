@@ -47,15 +47,7 @@
           [formGroupName]="i"
         >
           <img
-            [src]="
-              ctrl.value.type === contactOptions.PHONE_NUMBER
-                ? IMAGES.PHONE
-                : ctrl.value.type === contactOptions.HOME_NUMBER
-                ? IMAGES.HOME
-                : ctrl.value.type === contactOptions.EMAIL
-                ? IMAGES.EMAIL
-                : IMAGES.DEFAULT
-            "
+            [src]="properImage(ctrl.value.type)"
             alt="icon"
           />
           <select formControlName="type" class="select">

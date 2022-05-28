@@ -53,7 +53,7 @@ export class AddComponent implements OnInit {
 
     this.initForm();
     this.validImage = this.editMode;
-    
+    this.properImage(0);
   }
 
   private async initForm() {
@@ -108,6 +108,19 @@ export class AddComponent implements OnInit {
     this.personForm.patchValue({
       imageUrl: url,
     });
+  }
+
+  properImage(type: number) {
+    switch (type) {
+      case this.contactOptions.PHONE_NUMBER:
+        return IMAGE_URLS.PHONE;
+      case this.contactOptions.HOME_NUMBER:
+        return IMAGE_URLS.HOME;
+      case this.contactOptions.EMAIL:
+        return IMAGE_URLS.EMAIL;
+      default:
+        return IMAGE_URLS.DEFAULT;
+    }
   }
 
   private newData(data: Contact | null = null): FormGroup {
