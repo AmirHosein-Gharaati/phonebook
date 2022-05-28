@@ -49,11 +49,11 @@
           <img
             [src]="
               ctrl.value.category === contactOptions.PHONE_NUMBER
-                ? 'https://cdn4.iconfinder.com/data/icons/social-media-2097/94/phone-512.png'
+                ? IMAGES.PHONE
                 : ctrl.value === contactOptions.HOME_NUMBER
-                ? 'https://cdn4.iconfinder.com/data/icons/network-and-communication-2-10/48/97-512.png'
+                ? IMAGES.HOME
                 : ctrl.value === contactOptions.EMAIL
-                ? 'https://www.nidirect.gov.uk/sites/default/files/styles/nigov_full_620_x1/public/images/email_logo.jpg?itok=ifUhNgCT'
+                ? IMAGES.EMAIL
                 : defaultProfileImageURL
             "
             alt="icon"

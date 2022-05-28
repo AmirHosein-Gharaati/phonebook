@@ -7,7 +7,7 @@ import {
   FormControl,
   FormGroup,
   ValidationErrors,
-  Validators
+  Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { lastValueFrom, Observable, of } from 'rxjs';
@@ -16,14 +16,12 @@ import {
   debounceTime,
   distinctUntilChanged,
   map,
-  switchMap
+  switchMap,
 } from 'rxjs/operators';
 import { ApiService } from 'src/app/core/http/api.service';
 import { PersonService } from 'src/app/core/services/person.service';
-import {
-  Categories,
-  Contact
-} from 'src/app/shared/models/contact.model';
+import { IMAGE_URLS } from 'src/app/shared/image-urls.model';
+import { Categories, Contact } from 'src/app/shared/models/contact.model';
 import { Person } from 'src/app/shared/models/person.model';
 
 @Component({
@@ -36,6 +34,7 @@ export class AddComponent implements OnInit {
   person: Person;
   editMode: boolean = false;
   contactOptions = Categories;
+  IMAGES = IMAGE_URLS;
   validImage: boolean;
   defaultProfileImageURL: string =
     'https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png';
@@ -58,7 +57,6 @@ export class AddComponent implements OnInit {
     this.validImage = this.editMode;
 
     console.log(this.contactData.controls);
-    
   }
 
   private async initForm() {
@@ -88,7 +86,6 @@ export class AddComponent implements OnInit {
         person.contact.forEach((contact) => {
           this.contactData.push(this.newData(contact));
         });
-
       } catch (error) {
         this.router.navigate(['../'], { relativeTo: this.route });
       }
@@ -96,7 +93,7 @@ export class AddComponent implements OnInit {
       this.personForm.patchValue({
         imageUrl: imageUrl,
         firstName: firstName,
-        lastName: lastName
+        lastName: lastName,
       });
     }
   }
@@ -181,9 +178,7 @@ export class AddComponent implements OnInit {
           debounceTime(500),
 
           distinctUntilChanged(),
-          switchMap((value) =>
-            this.personService.fetchValidImageURL(imageUrl)
-          ),
+          switchMap((value) => this.personService.fetchValidImageURL(imageUrl)),
           map((data: any) => {
             this.validImage = data.type.startsWith('image/');
             return this.validImage ? null : { invalidAsync: true };
