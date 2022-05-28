@@ -2,11 +2,11 @@
   <div class="contact-detail__main">
     <img
       class="contact-detail__main__image"
-      [src]="selectedContact.imageURL"
+      [src]="selectedPerson.imageUrl"
       alt=""
     />
     <h3 class="contact-detail__main__name">
-      {{ selectedContact.firstName + " " + selectedContact.lastName }}
+      {{ selectedPerson.firstName + " " + selectedPerson.lastName }}
     </h3>
   </div>
   <hr />
@@ -14,7 +14,7 @@
     <button class="btn btn-edit" type="button" [routerLink]="['edit']">
       Edit
     </button>
-    <button class="btn btn-delete" type="button" (click)="onDeleteContact()">
+    <button class="btn btn-delete" type="button" (click)="onDeletePerson()">
       Delete
     </button>
   </div>
