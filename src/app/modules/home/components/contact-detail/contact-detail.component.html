@@ -24,11 +24,10 @@
       class="contact-detail__item"
       *ngFor="let control of selectedPerson.contact"
     >
-    {{ control.type }}
       <img
         class="contact-detail__item__icon"
         [src]="
-          control.type === 0 
+          control.type === 0
             ? 'https://www.nidirect.gov.uk/sites/default/files/styles/nigov_full_620_x1/public/images/email_logo.jpg?itok=ifUhNgCT'
             : control.type === 1
             ? 'https://cdn4.iconfinder.com/data/icons/social-media-2097/94/phone-512.png'
@@ -38,7 +37,17 @@
         "
         alt=""
       />
-      <span class="contact-detail__item__type">{{ control.type }}</span>
+      <span class="contact-detail__item__type">
+        {{
+          control.type === 0
+            ? "Phone Number"
+            : control.type === 1
+            ? "Home Number"
+            : control.type === 2
+            ? "Email"
+            : ""
+        }}
+      </span>
       <span class="contact-detail__item__text">{{ control.value }}</span>
     </div>
   </div>
