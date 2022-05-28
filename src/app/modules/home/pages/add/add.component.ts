@@ -116,18 +116,18 @@ export class AddComponent implements OnInit {
       value: new FormControl(data?.value),
     });
 
-    const categoryControl: FormControl = form.get('type') as FormControl;
+    const typeControl: FormControl = form.get('type') as FormControl;
     const valueControl: FormControl = form.get('value') as FormControl;
 
-    categoryControl.valueChanges.subscribe((categoryType) => {
+    typeControl.valueChanges.subscribe((newType) => {
       if (
-        categoryType == Categories.PHONE_NUMBER ||
-        categoryType == Categories.HOME_NUMBER
+        newType == Categories.PHONE_NUMBER ||
+        newType == Categories.HOME_NUMBER
       ) {
         valueControl.setValidators(
           Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')
         );
-      } else if (categoryType == Categories.EMAIL) {
+      } else if (newType == Categories.EMAIL) {
         valueControl.setValidators(Validators.email);
       }
     });
