@@ -7,7 +7,7 @@ import {
   FormControl,
   FormGroup,
   ValidationErrors,
-  Validators,
+  Validators
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { lastValueFrom, Observable, of } from 'rxjs';
@@ -16,15 +16,15 @@ import {
   debounceTime,
   distinctUntilChanged,
   map,
-  switchMap,
+  switchMap
 } from 'rxjs/operators';
 import { ApiService } from 'src/app/core/http/api.service';
 import { PersonService } from 'src/app/core/services/person.service';
-import { Person } from 'src/app/shared/models/person.model';
 import {
   Categories,
-  Contact,
+  Contact
 } from 'src/app/shared/models/contact.model';
+import { Person } from 'src/app/shared/models/person.model';
 
 @Component({
   selector: 'app-add',
@@ -61,7 +61,7 @@ export class AddComponent implements OnInit {
   private async initForm() {
     this.personForm = this.formBuilder.group({
       id: this.id,
-      imageURL: new FormControl(null, Validators.required),
+      imageUrl: new FormControl(null, Validators.required),
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       contacts: new FormArray([]),
@@ -71,14 +71,14 @@ export class AddComponent implements OnInit {
 
     if (this.editMode) {
       let person;
-      let imageURL = '';
+      let imageUrl = '';
       let firstName = '';
       let lastName = '';
       const data = new FormArray([]);
 
       try {
         person = await lastValueFrom(this.apiService.findPerson(this.id));
-        imageURL = person.imageUrl;
+        imageUrl = person.imageUrl;
         firstName = person.firstName;
         lastName = person.lastName;
 
@@ -91,7 +91,7 @@ export class AddComponent implements OnInit {
       }
 
       this.personForm.patchValue({
-        imageURL: imageURL,
+        imageUrl: imageUrl,
         firstName: firstName,
         lastName: lastName
       });
@@ -103,12 +103,12 @@ export class AddComponent implements OnInit {
   }
 
   get imageurl(): string {
-    return this.personForm.get('imageURL')?.value;
+    return this.personForm.get('imageUrl')?.value;
   }
 
   set imageurl(url: string) {
     this.personForm.patchValue({
-      imageURL: url,
+      imageUrl: url,
     });
   }
 
@@ -168,7 +168,7 @@ export class AddComponent implements OnInit {
 
   imageValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      const imageURL: string = control.value;
+      const imageUrl: string = control.value;
 
       if (!control.value) return of(null);
 
@@ -179,7 +179,7 @@ export class AddComponent implements OnInit {
 
           distinctUntilChanged(),
           switchMap((value) =>
-            this.personService.fetchValidImageURL(imageURL)
+            this.personService.fetchValidImageURL(imageUrl)
           ),
           map((data: any) => {
             this.validImage = data.type.startsWith('image/');

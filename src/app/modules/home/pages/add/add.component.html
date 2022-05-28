@@ -1,5 +1,5 @@
 <div class="add">
-  <form [formGroup]="contactForm" (ngSubmit)="onSumbit()">
+  <form [formGroup]="personForm" (ngSubmit)="onSumbit()">
     <div class="add__image">
       <label>Image URL</label>
       <div class="add__image-wrapper">
@@ -48,25 +48,25 @@
         >
           <img
             [src]="
-              ctrl.value.category === controlDataOptions.EMAIL
+              ctrl.value.category === contactOptions.EMAIL
                 ? 'https://www.nidirect.gov.uk/sites/default/files/styles/nigov_full_620_x1/public/images/email_logo.jpg?itok=ifUhNgCT'
-                : ctrl.value.category === controlDataOptions.PHONE_NUMBER
+                : ctrl.value.category === contactOptions.PHONE_NUMBER
                 ? 'https://cdn4.iconfinder.com/data/icons/social-media-2097/94/phone-512.png'
-                : ctrl.value.category === controlDataOptions.HOME_NUMBER
+                : ctrl.value.category === contactOptions.HOME_NUMBER
                 ? 'https://cdn4.iconfinder.com/data/icons/network-and-communication-2-10/48/97-512.png'
                 : defaultProfileImageURL
             "
             alt="icon"
           />
           <select formControlName="category" class="select">
-            <option [value]="controlDataOptions.PHONE_NUMBER">
-              {{ controlDataOptions.PHONE_NUMBER }}
+            <option [value]="contactOptions.PHONE_NUMBER">
+              {{ contactOptions.PHONE_NUMBER }}
             </option>
-            <option [value]="controlDataOptions.HOME_NUMBER">
-              {{ controlDataOptions.HOME_NUMBER }}
+            <option [value]="contactOptions.HOME_NUMBER">
+              {{ contactOptions.HOME_NUMBER }}
             </option>
-            <option [value]="controlDataOptions.EMAIL">
-              {{ controlDataOptions.EMAIL }}
+            <option [value]="contactOptions.EMAIL">
+              {{ contactOptions.EMAIL }}
             </option>
           </select>
           <input class="input" placeholder="text" formControlName="text" />
@@ -77,7 +77,7 @@
     <button
       type="submit"
       class="btn add__save-btn btn-success"
-      [disabled]="contactForm.invalid"
+      [disabled]="personForm.invalid"
     >
       Save
     </button>
