@@ -1,4 +1,4 @@
-<div *ngIf="selectedContact" class="contact-detail">
+<div *ngIf="selectedPerson" class="contact-detail">
   <div class="contact-detail__main">
     <img
       class="contact-detail__main__image"
@@ -22,7 +22,7 @@
   <div class="contact-detail__list">
     <div
       class="contact-detail__item"
-      *ngFor="let control of selectedContact.controlDatas"
+      *ngFor="let control of selectedPerson.contact"
     >
       <img
         class="contact-detail__item__icon"
