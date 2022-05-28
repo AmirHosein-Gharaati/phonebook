@@ -9,8 +9,8 @@ import { fromEvent, Subscription } from 'rxjs';
 import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
-import { ContactService } from 'src/app/core/services/contact.service';
-import { Contact } from 'src/app/shared/models/contact.model';
+import { PersonService } from 'src/app/core/services/person.service';
+import { Person } from 'src/app/shared/models/person.model';
 
 @Component({
   selector: 'app-home',
@@ -19,21 +19,21 @@ import { Contact } from 'src/app/shared/models/contact.model';
 export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput', { static: true }) searchInput: ElementRef;
   faMagnifyingGlass = faMagnifyingGlass;
-  contacts: Contact[] = [];
-  contactsSubscription: Subscription;
+  persons: Person[] = [];
+  personsSubscription: Subscription;
   searchInputSubscription: Subscription;
   searchText = '';
 
-  constructor(private contactService: ContactService) {}
+  constructor(private personService: PersonService) {}
 
   ngOnInit(): void {
-    this.contactsSubscription = this.contactService.contactsChanged.subscribe(
-      (contacts: Contact[]) => {
-        this.contacts = contacts;
+    this.personsSubscription = this.personService.personsChanged.subscribe(
+      (persons: Person[]) => {
+        this.persons = persons;
       }
     );
 
-    this.contactService.getContacts();
+    this.personService.getPersons();
 
     this.searchInputSubscription = fromEvent(
       this.searchInput.nativeElement,
@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.contactsSubscription.unsubscribe();
+    this.personsSubscription.unsubscribe();
     this.searchInputSubscription.unsubscribe();
   }
 }
