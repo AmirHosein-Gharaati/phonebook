@@ -1,7 +1,7 @@
 export enum Categories {
-  PHONE_NUMBER = 'Phone Number',
-  HOME_NUMBER = 'Home Number',
-  EMAIL = 'Email',
+  PHONE_NUMBER = 0,
+  HOME_NUMBER = 1,
+  EMAIL = 2,
 }
 
 export interface Contact {

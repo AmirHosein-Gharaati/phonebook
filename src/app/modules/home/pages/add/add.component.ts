@@ -114,8 +114,8 @@ export class AddComponent implements OnInit {
 
   private newData(data: Contact | null = null): FormGroup {
     const form: FormGroup = this.formBuilder.group({
-      category: new FormControl(data?.category, Validators.required),
-      text: new FormControl(data?.text),
+      category: new FormControl(data?.type, Validators.required),
+      text: new FormControl(data?.value),
     });
 
     const categoryControl: FormControl = form.get('category') as FormControl;
