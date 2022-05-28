@@ -3,6 +3,6 @@
   [routerLink]="[person.personId]"
   routerLinkActive="contact-item__active"
 >
-  <img [src]="person.imageUrl" />
+  <img [src]="person.imageUrl ? person.imageUrl : IMAGES.DEFAULT" />
   <span>{{ person.firstName + " " + person.lastName }}</span>
 </div>
