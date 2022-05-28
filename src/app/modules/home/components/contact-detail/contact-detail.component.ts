@@ -9,7 +9,7 @@ import { Person } from 'src/app/shared/models/person.model';
   selector: 'app-contact-detail',
   templateUrl: './contact-detail.component.html',
 })
-export class PersonDetailComponent implements OnInit {
+export class ContactDetailComponent implements OnInit {
   selectedPerson: Person;
   personId: number;
   categories = Categories;

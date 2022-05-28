@@ -5,7 +5,7 @@ import { Person } from 'src/app/shared/models/person.model';
   selector: 'app-contact-item',
   templateUrl: './contact-item.component.html',
 })
-export class PersonItemComponent implements OnInit {
+export class ContactItemComponent implements OnInit {
   @Input() person: Person;
   selectedPerson: Person;
 
