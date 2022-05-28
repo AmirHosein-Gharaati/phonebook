@@ -46,10 +46,7 @@
           *ngFor="let ctrl of contactData.controls; let i = index"
           [formGroupName]="i"
         >
-          <img
-            [src]="getProperImage(ctrl.value.type)"
-            alt="icon"
-          />
+          <img [src]="getProperImage(ctrl.value.type)" alt="icon" />
           <select formControlName="type" class="select">
             <option [value]="contactOptions.PHONE_NUMBER">
               {{ contactOptions.PHONE_NUMBER }}
