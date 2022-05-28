@@ -2,7 +2,7 @@
   <div class="contact-detail__main">
     <img
       class="contact-detail__main__image"
-      [src]="selectedPerson.imageUrl"
+      [src]="selectedPerson.imageUrl ? IMAGES.EMAIL : IMAGES.DEFAULT"
       alt=""
     />
     <h3 class="contact-detail__main__name">
