@@ -27,11 +27,11 @@
       <img
         class="contact-detail__item__icon"
         [src]="
-          control.type === 0
+          control.type === categories.PHONE_NUMBER
             ? 'https://www.nidirect.gov.uk/sites/default/files/styles/nigov_full_620_x1/public/images/email_logo.jpg?itok=ifUhNgCT'
-            : control.type === 1
+            : control.type === categories.HOME_NUMBER
             ? 'https://cdn4.iconfinder.com/data/icons/social-media-2097/94/phone-512.png'
-            : control.type === 2
+            : control.type === categories.EMAIL
             ? 'https://cdn4.iconfinder.com/data/icons/network-and-communication-2-10/48/97-512.png'
             : ''
         "
