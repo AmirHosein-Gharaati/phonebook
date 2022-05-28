@@ -58,7 +58,7 @@ export class AddComponent implements OnInit {
   private async initForm() {
     this.personForm = this.formBuilder.group({
       id: this.id,
-      imageUrl: new FormControl(null, Validators.required),
+      imageUrl: new FormControl(null),
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       contacts: new FormArray([]),
