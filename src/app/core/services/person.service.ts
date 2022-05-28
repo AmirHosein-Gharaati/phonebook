@@ -52,7 +52,6 @@ export class PersonService {
   }
 
   updateConact(newPerson: Person) {
-    // debugger;
     const id = newPerson.personId;
     const person = this.getPerson(id);
     if (!person) throw new Error('ID number is incorrect!');
