@@ -13,8 +13,8 @@
     </div>
     <div class="home__list">
       <app-contact-item
-        *ngFor="let contact of contacts | filter: searchText"
-        [contact]="contact"
+        *ngFor="let person of persons | filter: searchText"
+        [person]="person"
       ></app-contact-item>
     </div>
   </div>
