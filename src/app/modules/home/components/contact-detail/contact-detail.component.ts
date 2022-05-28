@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/core/http/api.service';
 import { PersonService } from 'src/app/core/services/person.service';
 import { Categories } from 'src/app/shared/models/contact.model';
 import { Person } from 'src/app/shared/models/person.model';
+import { IMAGE_URLS } from 'src/app/shared/image-urls.model';
 
 @Component({
   selector: 'app-contact-detail',
@@ -13,6 +14,7 @@ export class ContactDetailComponent implements OnInit {
   selectedPerson: Person;
   personId: number;
   categories = Categories;
+  IMAGES = IMAGE_URLS;
 
   constructor(
     private personService: PersonService,
