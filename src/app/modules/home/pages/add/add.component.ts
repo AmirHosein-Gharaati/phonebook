@@ -34,6 +34,7 @@ export class AddComponent implements OnInit {
   personForm: FormGroup;
   person: Person;
   editMode: boolean = false;
+  contactOptions = Categories;
   IMAGES = IMAGE_URLS;
   validImage: boolean;
   getProperImage = getProperImage;
