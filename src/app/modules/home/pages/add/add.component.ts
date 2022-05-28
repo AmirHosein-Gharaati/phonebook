@@ -7,7 +7,7 @@ import {
   FormControl,
   FormGroup,
   ValidationErrors,
-  Validators,
+  Validators
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { lastValueFrom, Observable, of } from 'rxjs';
@@ -16,10 +16,11 @@ import {
   debounceTime,
   distinctUntilChanged,
   map,
-  switchMap,
+  switchMap
 } from 'rxjs/operators';
 import { ApiService } from 'src/app/core/http/api.service';
 import { PersonService } from 'src/app/core/services/person.service';
+import { getProperImage } from 'src/app/shared/functions';
 import { IMAGE_URLS } from 'src/app/shared/image-urls.model';
 import { Categories, Contact } from 'src/app/shared/models/contact.model';
 import { Person } from 'src/app/shared/models/person.model';
@@ -33,9 +34,9 @@ export class AddComponent implements OnInit {
   personForm: FormGroup;
   person: Person;
   editMode: boolean = false;
-  contactOptions = Categories;
   IMAGES = IMAGE_URLS;
   validImage: boolean;
+  getProperImage = getProperImage;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -107,21 +108,6 @@ export class AddComponent implements OnInit {
     this.personForm.patchValue({
       imageUrl: url,
     });
-  }
-
-  properImage(type: number) {
-    const res = Number(type) as Categories;
-
-    switch (res) {
-      case this.contactOptions.PHONE_NUMBER:
-        return IMAGE_URLS.PHONE;
-      case this.contactOptions.HOME_NUMBER:
-        return IMAGE_URLS.HOME;
-      case this.contactOptions.EMAIL:
-        return IMAGE_URLS.EMAIL;
-      default:
-        return IMAGE_URLS.DEFAULT;
-    }
   }
 
   private newData(data: Contact | null = null): FormGroup {
