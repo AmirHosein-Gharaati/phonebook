@@ -43,6 +43,4 @@ export class ContactDetailComponent implements OnInit {
     this.personService.deletePerson(this.personId);
     this.router.navigate(['../']);
   }
-
-  
 }
