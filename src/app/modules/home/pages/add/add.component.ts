@@ -56,6 +56,9 @@ export class AddComponent implements OnInit {
 
     this.initForm();
     this.validImage = this.editMode;
+
+    console.log(this.contactData.controls);
+    
   }
 
   private async initForm() {
@@ -115,22 +118,22 @@ export class AddComponent implements OnInit {
   private newData(data: Contact | null = null): FormGroup {
     const form: FormGroup = this.formBuilder.group({
       category: new FormControl(data?.type, Validators.required),
-      text: new FormControl(data?.value),
+      value: new FormControl(data?.value),
     });
 
     const categoryControl: FormControl = form.get('category') as FormControl;
-    const textControl: FormControl = form.get('text') as FormControl;
+    const valueControl: FormControl = form.get('value') as FormControl;
 
     categoryControl.valueChanges.subscribe((categoryType) => {
       if (
         categoryType == Categories.PHONE_NUMBER ||
         categoryType == Categories.HOME_NUMBER
       ) {
-        textControl.setValidators(
+        valueControl.setValidators(
           Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')
         );
       } else if (categoryType == Categories.EMAIL) {
-        textControl.setValidators(Validators.email);
+        valueControl.setValidators(Validators.email);
       }
     });
 
