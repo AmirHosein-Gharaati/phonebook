@@ -26,15 +26,7 @@
     >
       <img
         class="contact-detail__item__icon"
-        [src]="
-          control.type === categories.PHONE_NUMBER
-            ? IMAGES.PHONE
-            : control.type === categories.HOME_NUMBER
-            ? IMAGES.HOME
-            : control.type === categories.EMAIL
-            ? IMAGES.EMAIL
-            : ''
-        "
+        [src]="getProperImage(control.type)"
         alt=""
       />
       <span class="contact-detail__item__type">

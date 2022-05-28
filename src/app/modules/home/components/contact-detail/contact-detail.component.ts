@@ -5,6 +5,7 @@ import { PersonService } from 'src/app/core/services/person.service';
 import { Categories } from 'src/app/shared/models/contact.model';
 import { Person } from 'src/app/shared/models/person.model';
 import { IMAGE_URLS } from 'src/app/shared/image-urls.model';
+import { getProperImage } from 'src/app/shared/functions';
 
 @Component({
   selector: 'app-contact-detail',
@@ -15,6 +16,7 @@ export class ContactDetailComponent implements OnInit {
   personId: number;
   categories = Categories;
   IMAGES = IMAGE_URLS;
+  getProperImage = getProperImage;
 
   constructor(
     private personService: PersonService,
@@ -41,4 +43,6 @@ export class ContactDetailComponent implements OnInit {
     this.personService.deletePerson(this.personId);
     this.router.navigate(['../']);
   }
+
+  
 }
