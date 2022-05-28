@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { ContactService } from 'src/app/core/services/contact.service';
-import { Contact } from 'src/app/shared/models/contact.model';
-import { CDCategories } from 'src/app/shared/models/control-data.model';
+import { Contact } from 'src/app/shared/models/person.model';
+import { Categories } from 'src/app/shared/models/contact.model';
 import { ApiService } from 'src/app/core/http/api.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { ApiService } from 'src/app/core/http/api.service';
 export class ContactDetailComponent implements OnInit {
   selectedContact: Contact;
   contactId: number;
-  categories = CDCategories;
+  categories = Categories;
 
   constructor(
     private contactService: ContactService,

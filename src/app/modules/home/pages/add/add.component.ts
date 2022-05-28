@@ -19,12 +19,12 @@ import {
   switchMap,
 } from 'rxjs/operators';
 import { ApiService } from 'src/app/core/http/api.service';
-import { ContactService } from 'src/app/core/services/contact.service';
-import { Contact } from 'src/app/shared/models/contact.model';
+import { PersonService } from 'src/app/core/services/contact.service';
+import { Person } from 'src/app/shared/models/person.model';
 import {
-  CDCategories,
-  ControlData,
-} from 'src/app/shared/models/control-data.model';
+  Categories,
+  Contact,
+} from 'src/app/shared/models/contact.model';
 
 @Component({
   selector: 'app-add',
@@ -32,10 +32,10 @@ import {
 })
 export class AddComponent implements OnInit {
   id: number;
-  contactForm: FormGroup;
-  contact: Contact;
+  personForm: FormGroup;
+  person: Person;
   editMode: boolean = false;
-  controlDataOptions = CDCategories;
+  contactOptions = Categories;
   validImage: boolean;
   defaultProfileImageURL: string =
     'https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png';
@@ -44,7 +44,7 @@ export class AddComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private contactService: ContactService,
+    private personService: PersonService,
     private apiService: ApiService
   ) {}
 
@@ -59,38 +59,38 @@ export class AddComponent implements OnInit {
   }
 
   private async initForm() {
-    this.contactForm = this.formBuilder.group({
+    this.personForm = this.formBuilder.group({
       id: this.id,
       imageURL: new FormControl(null, Validators.required),
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
-      controlDatas: new FormArray([]),
+      contacts: new FormArray([]),
     });
 
-    (<FormControl>this.contactForm.get('firstName')).updateValueAndValidity();
+    (<FormControl>this.personForm.get('firstName')).updateValueAndValidity();
 
     if (this.editMode) {
-      let contact;
+      let person;
       let imageURL = '';
       let firstName = '';
       let lastName = '';
       const data = new FormArray([]);
 
       try {
-        contact = await lastValueFrom(this.apiService.findContact(this.id));
-        imageURL = contact.imageURL;
-        firstName = contact.firstName;
-        lastName = contact.lastName;
+        person = await lastValueFrom(this.apiService.findPerson(this.id));
+        imageURL = person.imageURL;
+        firstName = person.firstName;
+        lastName = person.lastName;
 
-        contact.controlDatas.forEach((controlData) => {
-          this.contactData.push(this.newData(controlData));
+        person.contacts.forEach((contact) => {
+          this.contactData.push(this.newData(contact));
         });
 
       } catch (error) {
         this.router.navigate(['../'], { relativeTo: this.route });
       }
 
-      this.contactForm.patchValue({
+      this.personForm.patchValue({
         imageURL: imageURL,
         firstName: firstName,
         lastName: lastName
@@ -99,20 +99,20 @@ export class AddComponent implements OnInit {
   }
 
   get contactData(): FormArray {
-    return this.contactForm.get('controlDatas') as FormArray;
+    return this.personForm.get('contacts') as FormArray;
   }
 
   get imageurl(): string {
-    return this.contactForm.get('imageURL')?.value;
+    return this.personForm.get('imageURL')?.value;
   }
 
   set imageurl(url: string) {
-    this.contactForm.patchValue({
+    this.personForm.patchValue({
       imageURL: url,
     });
   }
 
-  private newData(data: ControlData | null = null): FormGroup {
+  private newData(data: Contact | null = null): FormGroup {
     const form: FormGroup = this.formBuilder.group({
       category: new FormControl(data?.category, Validators.required),
       text: new FormControl(data?.text),
@@ -123,13 +123,13 @@ export class AddComponent implements OnInit {
 
     categoryControl.valueChanges.subscribe((categoryType) => {
       if (
-        categoryType == CDCategories.PHONE_NUMBER ||
-        categoryType == CDCategories.HOME_NUMBER
+        categoryType == Categories.PHONE_NUMBER ||
+        categoryType == Categories.HOME_NUMBER
       ) {
         textControl.setValidators(
           Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')
         );
-      } else if (categoryType == CDCategories.EMAIL) {
+      } else if (categoryType == Categories.EMAIL) {
         textControl.setValidators(Validators.email);
       }
     });
@@ -138,7 +138,7 @@ export class AddComponent implements OnInit {
   }
 
   private getComponentId(params: Params) {
-    return +params['id'] ? +params['id'] : this.contactService.getLength() + 1;
+    return +params['id'] ? +params['id'] : this.personService.getLength() + 1;
   }
 
   onCancel() {
@@ -147,12 +147,12 @@ export class AddComponent implements OnInit {
 
   onSumbit() {
     if (this.editMode) {
-      this.contactService.updateConact(this.contactForm.value as Contact);
+      this.personService.updateConact(this.personForm.value as Person);
     } else {
       if (!this.imageurl) {
         this.imageurl = this.defaultProfileImageURL;
       }
-      this.contactService.addContact(this.contactForm.value as Contact);
+      this.personService.addPerson(this.personForm.value as Person);
     }
 
     this.onCancel();
@@ -179,7 +179,7 @@ export class AddComponent implements OnInit {
 
           distinctUntilChanged(),
           switchMap((value) =>
-            this.contactService.fetchValidImageURL(imageURL)
+            this.personService.fetchValidImageURL(imageURL)
           ),
           map((data: any) => {
             this.validImage = data.type.startsWith('image/');

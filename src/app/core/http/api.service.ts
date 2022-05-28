@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Contact } from 'src/app/shared/models/contact.model';
+import { Person } from 'src/app/shared/models/person.model';
 
 @Injectable({
   providedIn: 'root',
@@ -9,26 +9,26 @@ export class ApiService {
   baseUrl = 'http://localhost:5000/api';
   constructor(private http: HttpClient) {}
 
-  getContacts() {
-    return this.http.get<Contact[]>(`${this.baseUrl}/contact`);
+  getPersons() {
+    return this.http.get<Person[]>(`${this.baseUrl}/person`);
   }
 
-  findContact(id: number) {
-    return this.http.get<Contact>(`${this.baseUrl}/contact/${id}`);
+  findPerson(id: number) {
+    return this.http.get<Person>(`${this.baseUrl}/person/${id}`);
   }
 
-  addContact(contact: Contact) {
-    return this.http.post<Contact>(`${this.baseUrl}/api/contact`, contact);
+  addPerson(person: Person) {
+    return this.http.post<Person>(`${this.baseUrl}/person`, person);
   }
 
-  updateContact(contact: Contact) {
-    return this.http.put<Contact>(
-      `${this.baseUrl}/api/contact/${contact.id}`,
-      contact
+  updatePerson(person: Person) {
+    return this.http.put<Person>(
+      `${this.baseUrl}/person/${person.personId}`,
+      person
     );
   }
 
-  deleteContact(id: number) {
-    return this.http.delete(`${this.baseUrl}/api/contact/${id}`);
+  deletePerson(id: number) {
+    return this.http.delete(`${this.baseUrl}/person/${id}`);
   }
 }

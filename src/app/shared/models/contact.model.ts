@@ -1,9 +1,12 @@
-import { ControlData } from './control-data.model';
+export enum Categories {
+  PHONE_NUMBER = 'Phone Number',
+  HOME_NUMBER = 'Home Number',
+  EMAIL = 'Email',
+}
 
 export interface Contact {
-  id: number;
-  imageURL: string;
-  firstName: string;
-  lastName: string;
-  controlDatas: ControlData[];
+  contactId: number;
+  personRef: number;
+  category: string;
+  text: string;
 }
