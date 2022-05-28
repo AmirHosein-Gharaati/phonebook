@@ -55,8 +55,6 @@ export class AddComponent implements OnInit {
 
     this.initForm();
     this.validImage = this.editMode;
-
-    console.log(this.contactData.controls);
   }
 
   private async initForm() {

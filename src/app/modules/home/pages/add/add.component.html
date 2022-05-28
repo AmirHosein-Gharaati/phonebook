@@ -50,9 +50,9 @@
             [src]="
               ctrl.value.category === contactOptions.PHONE_NUMBER
                 ? IMAGES.PHONE
-                : ctrl.value === contactOptions.HOME_NUMBER
+                : ctrl.value.category === contactOptions.HOME_NUMBER
                 ? IMAGES.HOME
-                : ctrl.value === contactOptions.EMAIL
+                : ctrl.value.category === contactOptions.EMAIL
                 ? IMAGES.EMAIL
                 : defaultProfileImageURL
             "
