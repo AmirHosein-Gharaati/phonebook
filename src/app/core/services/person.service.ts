@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Person } from 'src/app/shared/models/person.model';
+import { Person, PersonPost } from 'src/app/shared/models/person.model';
 import { ApiService } from '../http/api.service';
 
 @Injectable({
@@ -46,8 +46,11 @@ export class PersonService {
   }
 
   addPerson(person: Person) {
-    this.apiService.addPerson(person).subscribe();
-    this.persons.push(person);
+    const {personId, ...personPost} = person;
+    
+    this.apiService.addPerson(personPost).subscribe(data => {
+      this.persons.push(data);
+    });
     this.personsChanged.next(this.persons.slice());
   }
 

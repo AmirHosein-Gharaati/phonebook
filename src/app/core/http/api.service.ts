@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Person } from 'src/app/shared/models/person.model';
+import { Person, PersonPost } from 'src/app/shared/models/person.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,7 @@ export class ApiService {
     return this.http.get<Person>(`${this.baseUrl}/person/${id}`);
   }
 
-  addPerson(person: Person) {
+  addPerson(person: PersonPost) {
     return this.http.post<Person>(`${this.baseUrl}/person`, person);
   }
 

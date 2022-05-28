@@ -22,7 +22,7 @@ import { ApiService } from 'src/app/core/http/api.service';
 import { PersonService } from 'src/app/core/services/person.service';
 import { IMAGE_URLS } from 'src/app/shared/image-urls.model';
 import { Categories, Contact } from 'src/app/shared/models/contact.model';
-import { Person } from 'src/app/shared/models/person.model';
+import { Person, PersonPost } from 'src/app/shared/models/person.model';
 
 @Component({
   selector: 'app-add',
@@ -147,10 +147,7 @@ export class AddComponent implements OnInit {
     if (this.editMode) {
       this.personService.updateConact(this.personForm.value as Person);
     } else {
-      if (!this.imageurl) {
-        this.imageurl = this.IMAGES.DEFAULT;
-      }
-      this.personService.addPerson(this.personForm.value as Person);
+      this.personService.addPerson(<Person>this.personForm.value);
     }
 
     this.onCancel();
