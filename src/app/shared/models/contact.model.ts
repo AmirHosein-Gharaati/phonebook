@@ -7,6 +7,6 @@ export enum Categories {
 export interface Contact {
   contactId: number;
   personRef: number;
-  type: string;
+  type: number;
   value: string;
 }
