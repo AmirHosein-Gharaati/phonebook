@@ -53,7 +53,6 @@ export class AddComponent implements OnInit {
 
     this.initForm();
     this.validImage = this.editMode;
-    this.properImage(0);
   }
 
   private async initForm() {
@@ -111,7 +110,9 @@ export class AddComponent implements OnInit {
   }
 
   properImage(type: number) {
-    switch (type) {
+    const res = Number(type) as Categories;
+
+    switch (res) {
       case this.contactOptions.PHONE_NUMBER:
         return IMAGE_URLS.PHONE;
       case this.contactOptions.HOME_NUMBER:
