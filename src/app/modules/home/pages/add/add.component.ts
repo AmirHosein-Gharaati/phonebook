@@ -62,7 +62,7 @@ export class AddComponent implements OnInit {
   private async initForm() {
     this.personForm = this.formBuilder.group({
       personId: this.id,
-      imageUrl: new FormControl(null),
+      imageUrl: new FormControl(null, null, this.imageValidator()),
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       contact: new FormArray([]),
@@ -171,10 +171,8 @@ export class AddComponent implements OnInit {
 
       return control.valueChanges
         .pipe(
-          map(() => (this.validImage = false)),
           debounceTime(500),
-
-          distinctUntilChanged(),
+          map(() => (this.validImage = false)),
           switchMap((value) => this.personService.fetchValidImageURL(imageUrl)),
           map((data: any) => {
             this.validImage = data.type.startsWith('image/');
