@@ -73,7 +73,6 @@ export class AddComponent implements OnInit {
       let imageUrl = '';
       let firstName = '';
       let lastName = '';
-      const data = new FormArray([]);
 
       try {
         person = await lastValueFrom(this.apiService.findPerson(this.id));
@@ -83,7 +82,7 @@ export class AddComponent implements OnInit {
         lastName = person.lastName;
 
         person.contact.forEach((contact) => {
-          this.contactData.push(this.newData(contact));
+          this.contactData.push(this.newContact(contact));
         });
       } catch (error) {
         this.router.navigate(['../'], { relativeTo: this.route });
@@ -111,7 +110,7 @@ export class AddComponent implements OnInit {
     });
   }
 
-  private newData(data: Contact | null = null): FormGroup {
+  private newContact(data: Contact | null = null): FormGroup {
     const form: FormGroup = this.formBuilder.group({
       type: new FormControl(data?.type, Validators.required),
       value: new FormControl(data?.value),
@@ -155,7 +154,7 @@ export class AddComponent implements OnInit {
   }
 
   addCategory() {
-    this.contactData.push(this.newData());
+    this.contactData.push(this.newContact());
   }
 
   removeCategory(index: number) {
