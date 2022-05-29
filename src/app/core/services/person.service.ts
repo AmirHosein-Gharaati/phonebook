@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { Person, PersonPost } from 'src/app/shared/models/person.model';
+import { Person } from 'src/app/shared/models/person.model';
 import { ApiService } from '../http/api.service';
 
 @Injectable({
