@@ -49,13 +49,13 @@
           <img [src]="getProperImage(ctrl.value.type)" alt="icon" />
           <select formControlName="type" class="select">
             <option [value]="contactOptions.PHONE_NUMBER">
-              {{ contactOptions.PHONE_NUMBER }}
+              {{ getProperName(contactOptions.PHONE_NUMBER) }}
             </option>
             <option [value]="contactOptions.HOME_NUMBER">
-              {{ contactOptions.HOME_NUMBER }}
+              {{ getProperName(contactOptions.HOME_NUMBER) }}
             </option>
             <option [value]="contactOptions.EMAIL">
-              {{ contactOptions.EMAIL }}
+              {{ getProperName(contactOptions.EMAIL) }}
             </option>
           </select>
           <input class="input" placeholder="value" formControlName="value" />

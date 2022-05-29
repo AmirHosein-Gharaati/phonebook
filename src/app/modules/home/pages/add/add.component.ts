@@ -20,7 +20,7 @@ import {
 } from 'rxjs/operators';
 import { ApiService } from 'src/app/core/http/api.service';
 import { PersonService } from 'src/app/core/services/person.service';
-import { getProperImage } from 'src/app/shared/functions';
+import { getProperImage, getProperName } from 'src/app/shared/functions';
 import { IMAGE_URLS } from 'src/app/shared/image-urls.model';
 import { Categories, Contact } from 'src/app/shared/models/contact.model';
 import { Person } from 'src/app/shared/models/person.model';
@@ -38,6 +38,7 @@ export class AddComponent implements OnInit {
   IMAGES = IMAGE_URLS;
   validImage: boolean;
   getProperImage = getProperImage;
+  getProperName = getProperName;
 
   constructor(
     private formBuilder: FormBuilder,
