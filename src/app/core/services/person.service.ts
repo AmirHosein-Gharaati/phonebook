@@ -51,10 +51,10 @@ export class PersonService {
     const person = this.getPerson(id);
     if (!person) throw new Error('ID number is incorrect!');
 
+    this.apiService.updatePerson(newPerson).subscribe();
+
     const index = this.getIndex(person.personId);
     this.persons[index] = newPerson;
-
-    this.apiService.updatePerson(newPerson).subscribe();
     this.personsChanged.next(this.persons.slice());
   }
 
@@ -62,9 +62,10 @@ export class PersonService {
     const person = this.getPerson(id);
     if (!person) throw new Error('ID number is incorrect!');
 
+    this.apiService.deletePerson(person.personId).subscribe();
+    
     const index = this.getIndex(person.personId);
     this.persons.splice(index, 1);
-    this.apiService.deletePerson(person.personId).subscribe();
     this.personsChanged.next(this.persons.slice());
   }
 
