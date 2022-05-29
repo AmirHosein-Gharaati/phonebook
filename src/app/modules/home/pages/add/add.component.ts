@@ -35,6 +35,7 @@ export class AddComponent implements OnInit {
   person: Person;
   editMode: boolean = false;
   contactOptions = Categories;
+  contactOptionsArr = Object.keys(Categories).filter((key: any) => isNaN(Number(Categories[key])));
   IMAGES = IMAGE_URLS;
   validImage: boolean;
   getProperImage = getProperImage;
