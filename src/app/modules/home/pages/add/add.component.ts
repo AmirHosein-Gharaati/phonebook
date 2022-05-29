@@ -137,7 +137,7 @@ export class AddComponent implements OnInit {
   }
 
   private getComponentId(params: Params) {
-    return +params['id'] ? +params['id'] : this.personService.getLength() + 1;
+    return +params['id'] ? +params['id'] : 0;
   }
 
   onCancel() {

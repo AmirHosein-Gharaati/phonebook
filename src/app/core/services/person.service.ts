@@ -37,10 +37,6 @@ export class PersonService {
     return index;
   }
 
-  getLength(): number {
-    return this.persons.length;
-  }
-
   addPerson(person: Person) {
     const { personId, ...personPost } = person;
 
