@@ -40,6 +40,7 @@ export class AddComponent implements OnInit {
   );
   IMAGES = IMAGE_URLS;
   validImage: boolean;
+  imgTagUrl: string;
   getProperImage = getProperImage;
   getProperName = getProperName;
 
@@ -97,15 +98,13 @@ export class AddComponent implements OnInit {
         firstName: firstName,
         lastName: lastName,
       });
+
+      this.imgTagUrl = imageUrl ? imageUrl : this.IMAGES.DEFAULT;
     }
   }
 
   get contactData(): FormArray {
     return this.personForm.get('contact') as FormArray;
-  }
-
-  get imageurl(): string {
-    return this.personForm.get('imageUrl')?.value;
   }
 
   set imageurl(url: string) {
@@ -169,7 +168,10 @@ export class AddComponent implements OnInit {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       const imageUrl: string = control.value;
 
-      if (!control.value) return of(null);
+      if (!control.value) {
+        this.imgTagUrl = this.IMAGES.DEFAULT;
+        return of(null);
+      }
 
       return control.valueChanges
         .pipe(
@@ -177,15 +179,17 @@ export class AddComponent implements OnInit {
           map(() => {
             this.validImage = false;
           }),
-          switchMap((value) => this.personService.fetchValidImageURL(imageUrl)),
+          switchMap(() => this.personService.fetchValidImageURL(imageUrl)),
           map((data: any) => {
             this.validImage = data.type.startsWith('image/');
+            this.imgTagUrl = imageUrl;
             return this.validImage ? null : { invalidAsync: true };
           })
         )
         .pipe(
           catchError((err) => {
             this.validImage = false;
+            this.imgTagUrl = this.IMAGES.DEFAULT;
             return of({ invalidAsync: true });
           })
         );
