@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Person, PersonPost } from 'src/app/shared/models/person.model';
 import { ApiService } from '../http/api.service';
 
@@ -15,10 +16,11 @@ export class PersonService {
   constructor(private apiService: ApiService, private http: HttpClient) {}
 
   getPersons() {
-    this.apiService.getPersons().subscribe((data: Person[]) => {
-      this.persons = data;
-      this.personsChanged.next(this.persons.slice());
-    });
+    return this.apiService.getPersons().pipe(
+      tap((p) => {
+        this.persons = p;
+      })
+    );
   }
 
   getPerson(id: number): Person {
@@ -63,7 +65,7 @@ export class PersonService {
     if (!person) throw new Error('ID number is incorrect!');
 
     this.apiService.deletePerson(person.personId).subscribe();
-    
+
     const index = this.getIndex(person.personId);
     this.persons.splice(index, 1);
     this.personsChanged.next(this.persons.slice());

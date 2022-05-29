@@ -27,13 +27,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private personService: PersonService) {}
 
   ngOnInit(): void {
-    this.personsSubscription = this.personService.personsChanged.subscribe(
-      (persons: Person[]) => {
-        this.persons = persons;
-      }
-    );
-
-    this.personService.getPersons();
+    this.personService.getPersons().subscribe((data) => {
+      this.persons = data;
+    });
 
     this.searchInputSubscription = fromEvent(
       this.searchInput.nativeElement,
@@ -52,7 +48,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.personsSubscription.unsubscribe();
     this.searchInputSubscription.unsubscribe();
   }
 }
