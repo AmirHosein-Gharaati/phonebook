@@ -35,7 +35,9 @@ export class AddComponent implements OnInit {
   person: Person;
   editMode: boolean = false;
   contactOptions = Categories;
-  contactOptionsArr = Object.keys(Categories).filter((key: any) => isNaN(Number(Categories[key])));
+  contactOptionsArr = Object.keys(Categories).filter((key: any) =>
+    isNaN(Number(Categories[key]))
+  );
   IMAGES = IMAGE_URLS;
   validImage: boolean;
   getProperImage = getProperImage;
@@ -171,8 +173,10 @@ export class AddComponent implements OnInit {
 
       return control.valueChanges
         .pipe(
-          debounceTime(500),
-          map(() => (this.validImage = false)),
+          debounceTime(1000),
+          map(() => {
+            this.validImage = false;
+          }),
           switchMap((value) => this.personService.fetchValidImageURL(imageUrl)),
           map((data: any) => {
             this.validImage = data.type.startsWith('image/');
