@@ -30,12 +30,11 @@ export class PersonService {
   }
 
   getIndex(id: number) {
-    for (let index in this.persons) {
-      const person = this.persons[index];
-      if (person.personId === id) return +index;
+    const index = this.persons.findIndex((p) => p.personId === id);
+    if (index === -1) {
+      throw new Error('Not Found!');
     }
-
-    throw new Error('Not Found!');
+    return index;
   }
 
   getLength(): number {
