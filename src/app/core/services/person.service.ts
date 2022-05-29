@@ -22,14 +22,11 @@ export class PersonService {
   }
 
   getPerson(id: number): Person {
-    const item: Array<Person> = this.persons.filter(
-      (person) => person.personId === id
-    );
-    if (item.length) {
-      return item[0];
-    } else {
+    const item = this.persons.find((person) => person.personId === id);
+    if (!item) {
       throw new Error('No person found with this id: ' + id);
     }
+    return item;
   }
 
   getIndex(id: number) {
@@ -46,9 +43,9 @@ export class PersonService {
   }
 
   addPerson(person: Person) {
-    const {personId, ...personPost} = person;
-    
-    this.apiService.addPerson(personPost).subscribe(data => {
+    const { personId, ...personPost } = person;
+
+    this.apiService.addPerson(personPost).subscribe((data) => {
       this.persons.push(data);
     });
     this.personsChanged.next(this.persons.slice());
@@ -61,7 +58,7 @@ export class PersonService {
 
     const index = this.getIndex(person.personId);
     this.persons[index] = newPerson;
-    
+
     this.apiService.updatePerson(newPerson).subscribe();
     this.personsChanged.next(this.persons.slice());
   }
