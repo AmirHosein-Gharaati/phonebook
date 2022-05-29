@@ -42,8 +42,8 @@ export class PersonService {
 
     this.apiService.addPerson(personPost).subscribe((data) => {
       this.persons.push(data);
+      this.personsChanged.next(this.persons.slice());
     });
-    this.personsChanged.next(this.persons.slice());
   }
 
   updateConact(newPerson: Person) {
