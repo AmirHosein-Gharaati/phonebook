@@ -36,11 +36,11 @@ export class HomeComponent implements OnInit, OnDestroy {
       'keyup'
     )
       .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
         map((event: any) => {
           return event.target.value;
-        }),
-        debounceTime(1000),
-        distinctUntilChanged()
+        })
       )
       .subscribe((text: string) => {
         this.searchText = text;
